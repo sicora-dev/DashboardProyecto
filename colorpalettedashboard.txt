@@ -1,0 +1,12 @@
+light:
+	backgroundColor: #F4F4F6,
+	textColor: #353535,
+	secondary: #E6E6E9,
+	tertiary: #9999A1,
+	highlight: #F46036
+dark:
+	backgroundColor: #1E1E22  # Un gris oscuro profundo para comodidad visual  
+	textColor: #E6E6E9       # Un gris claro para contraste y legibilidad  
+	secondary: #2C2C34       # Un tono más oscuro para diferenciación de secciones  
+	tertiary: #66666F        # Un gris medio similar al tono de la versión clara  
+	highlight: #F46036   

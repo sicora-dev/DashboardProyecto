@@ -1,0 +1,15 @@
+
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="BackgroundColor">#F4F4F6</Color>
+    <Color x:Key="TextColor">#353535</Color>
+    <Color x:Key="SecondaryColor">#E6E6E9</Color>
+    <Color x:Key="TertiaryColor">#9999A1</Color>
+    <Color x:Key="Highlight">#F46036</Color>
+    <Style x:Key="Body" TargetType="Grid">
+        <Setter Property="Background" Value="Black"></Setter>
+    </Style>
+    <Style x:Key="NavBar" TargetType="StackPanel">
+        <Setter Property="Background" Value="Gray"></Setter>
+    </Style>
+</ResourceDictionary>

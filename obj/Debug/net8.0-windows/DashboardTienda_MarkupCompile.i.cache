@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
 C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\App.xaml
-1-1644662438
+3-141613248
 
 6684662178
 198-556154604
-Views\MainWindow.xaml;
+Styles\Dark.xaml;Styles\Light.xaml;Views\MainWindow.xaml;
 
 True
 
