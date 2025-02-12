@@ -19,4 +19,7 @@ C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-wi
 C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-windows\ref\DashboardTienda.dll
 C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-windows\Views\MainWindow.g.cs
 C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-windows\Views\MainWindow.baml
-C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-windows\Styles.baml
+C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-windows\Styles\DarkTheme.baml
+C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-windows\Styles\LightTheme.baml
+C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\bin\Debug\net8.0-windows\DashboardTienda.dll.config
+C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-windows\DashboardTienda.csproj.ResolveComReference.cache

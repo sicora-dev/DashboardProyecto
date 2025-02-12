@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<SolidColorBrush x:Key="BackgroundColor" Color="#1E1E22"/>
+	<SolidColorBrush x:Key="TextColor" Color="#E6E6E9"/>
+	<SolidColorBrush x:Key="SecondaryColor" Color="#2C2C34"/>
+	<SolidColorBrush x:Key="TertiaryColor" Color="#66666F"/>
+	<SolidColorBrush x:Key="HighlightColor" Color="#F46036"/>
+
+	<Style TargetType="TextBlock" >
+		<Setter Property="Foreground"
+                Value="{DynamicResource TextColor}" />
+	</Style>
+</ResourceDictionary>

@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using DashboardTienda.Properties;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,17 @@ namespace DashboardTienda
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ThemeToggle_Checked(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).ApplyTheme(true);
+        }
+
+        private void ThemeToggle_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ((App)Application.Current).ApplyTheme(false);
+            
         }
     }
 }
