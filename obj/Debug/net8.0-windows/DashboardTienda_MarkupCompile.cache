@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\obj\Debug\net8.0-windows\
+D:\Mierda\Dev-Projects\Dashboard\obj\Debug\net8.0-windows\
 DashboardTienda
 none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP
-C:\Users\sicora\source\repos\DashboardTienda\DashboardTienda\App.xaml
-3-379866565
+D:\Mierda\Dev-Projects\Dashboard\App.xaml
+4-1210995180
 
-51709344922
-198-556154604
-Styles\DarkTheme.xaml;Styles\LightTheme.xaml;Views\MainWindow.xaml;
+61777719669
+1981839832580
+Styles\DarkTheme.xaml;Styles\LightTheme.xaml;Views\Login.xaml;Views\MainWindow.xaml;
 
-False
+True
 

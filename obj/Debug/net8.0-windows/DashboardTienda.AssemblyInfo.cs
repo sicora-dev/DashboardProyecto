@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DashboardTienda")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5bb24d75e3acf705d7fc59f6430dd23677e2c0da")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+44e2f58d27d5540f86813bd617c344e0ac578729")]
 [assembly: System.Reflection.AssemblyProductAttribute("DashboardTienda")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DashboardTienda")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -20,13 +20,21 @@
             <RowDefinition></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <StackPanel x:Name="NavBar"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Grid.RowSpan="3"
-                    Background="{DynamicResource SecondaryColor}">
-            <TextBlock Text="DashBoard" FontSize="30"></TextBlock>
-        </StackPanel>
+        <Border x:Name="NavBar"
+        Style="{DynamicResource NavBar}"
+        VerticalAlignment="Stretch"
+        HorizontalAlignment="Left"
+        Grid.RowSpan="3"
+        Height="Auto">
+            <StackPanel>
+                <TextBlock Text="DashBoard" FontSize="30"></TextBlock>
+                <TextBlock Text="Home" FontSize="20"></TextBlock>
+                <TextBlock Text="Products" FontSize="20"></TextBlock>
+                <TextBlock Text="Orders" FontSize="20"></TextBlock>
+                <TextBlock Text="Customers" FontSize="20"></TextBlock>
+                <TextBlock Text="Reports" FontSize="20"></TextBlock>
+            </StackPanel>
+        </Border>
         <StackPanel HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="10"
@@ -34,7 +42,6 @@
                     Grid.Row="2">
             <ToggleButton x:Name="ThemeToggle"
                           Content="Toggle Theme"
-                          
                           Background="{DynamicResource SecondaryColor}"
                           Foreground="{DynamicResource TextColor}"
                           Checked="ThemeToggle_Checked"

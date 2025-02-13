@@ -10,4 +10,10 @@
 		<Setter Property="Foreground"
                 Value="{DynamicResource TextColor}" />
 	</Style>
+
+    <Style x:Key="NavBar" TargetType="Border">
+        <Setter Property="Background" Value="{DynamicResource SecondaryColor}" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Height" Value="Auto"></Setter>
+    </Style>
 </ResourceDictionary>
