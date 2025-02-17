@@ -27,6 +27,7 @@
         Grid.RowSpan="3"
         Height="Auto">
             <StackPanel>
+                <TextBlock Text="{Binding User.role}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10"/>
                 <TextBlock Text="DashBoard" FontSize="30"></TextBlock>
                 <TextBlock Text="Home" FontSize="20"></TextBlock>
                 <TextBlock Text="Products" FontSize="20"></TextBlock>

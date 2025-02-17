@@ -40,16 +40,20 @@ namespace DashboardTienda
             }
 
             var user = new UserLogin { mail = mail, password = pass };
-            var result = await api.LoginAsync(user);
+            var result = await api.Login(user);
 
-            if (result != null)
+            if (result?.status == 200)
             {
                 MessageBox.Show("Inicio de sesión exitoso.");
+                TokenService.Instance.Token = result.token;
+                TokenService.Instance.DecodeToken();
+                MainWindow mainWindow = new MainWindow();
+                mainWindow.Show();
                 
             }
             else
             {
-                MessageBox.Show(result ?? "Error en el inicio de sesión.");
+                MessageBox.Show(result?.message ?? "Error en el inicio de sesión.");
             }
 
         }

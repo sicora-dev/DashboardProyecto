@@ -21,19 +21,33 @@ namespace DashboardTienda.Services
             _apiUrl = Env.GetString("API_URL");
         }
 
-        public async Task<string?> LoginAsync(UserLogin user)
-        {
-            var json = JsonSerializer.Serialize(user);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await _httpClient.PostAsync($"{_apiUrl}/login", content);
+        //public
 
-            if (!response.IsSuccessStatusCode)
+        public async Task<ApiResponse?> Login(UserLogin user)
+        {
+            var userJson = JsonSerializer.Serialize(user);
+            var content = new StringContent(userJson, Encoding.UTF8, "application/json");
+            var httpResponse = await _httpClient.PostAsync($"{_apiUrl}/login", content);
+
+            var responseContent = await httpResponse.Content.ReadAsStringAsync();
+            var apiResponse = JsonSerializer.Deserialize<ApiResponse>(responseContent);
+            if (apiResponse != null)
             {
-                var errorContent = await response.Content.ReadAsStringAsync();
-                var errorResponse = JsonSerializer.Deserialize<ApiErrorResponse>(errorContent);
-                return errorResponse?.message ?? null;
+                apiResponse.status = (int)httpResponse.StatusCode;
             }
-            return await response.Content.ReadAsStringAsync();
+
+            return apiResponse;
+
+        }
+        
+
+        //private
+
+        public async Task<ApiResponse?> GetUserById(string id)
+        {
+            
+            var httpResponse = await _httpClient.GetAsync($"{_apiUrl}/user/{id}");
+            return null;
         }
     }
 }

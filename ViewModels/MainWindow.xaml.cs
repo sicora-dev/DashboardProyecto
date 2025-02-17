@@ -1,4 +1,6 @@
-﻿using DashboardTienda.Properties;
+﻿using DashboardTienda.Models;
+using DashboardTienda.Properties;
+using DashboardTienda.Services;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,9 +19,12 @@ namespace DashboardTienda
     /// </summary>
     public partial class MainWindow : Window
     {
+        public LogedUser User => TokenService.Instance.User;
+
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         private void ThemeToggle_Checked(object sender, RoutedEventArgs e)

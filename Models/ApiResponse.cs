@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 
 namespace DashboardTienda.Models
 {
-    public class ApiErrorResponse
+    public class ApiResponse
     {
         public string message { get; set; }
+        public int status { get; set; }
+
+        public string token { get; set; }
     }
 }
-
