@@ -48,6 +48,7 @@ namespace DashboardTienda
                 TokenService.Instance.Token = result.token;
                 TokenService.Instance.DecodeToken();
                 MainWindow mainWindow = new MainWindow();
+                this.Close();
                 mainWindow.Show();
                 
             }
@@ -57,5 +58,11 @@ namespace DashboardTienda
             }
 
         }
+
+        private void ThemeToggleLogin(object sender, RoutedEventArgs e)
+        {
+            ThemeService.Instance.ToggleTheme();
+        }
+
     }
 }

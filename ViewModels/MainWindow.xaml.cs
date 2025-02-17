@@ -27,15 +27,11 @@ namespace DashboardTienda
             DataContext = this;
         }
 
-        private void ThemeToggle_Checked(object sender, RoutedEventArgs e)
+        private void ThemeToggleMain(object sender, RoutedEventArgs e)
         {
-            ((App)Application.Current).ApplyTheme(true);
+            ThemeService.Instance.ToggleTheme();
         }
 
-        private void ThemeToggle_Unchecked(object sender, RoutedEventArgs e)
-        {
-            ((App)Application.Current).ApplyTheme(false);
-            
-        }
+        
     }
 }

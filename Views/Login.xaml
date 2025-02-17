@@ -8,14 +8,17 @@
         ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="LoginWindow" Height="500" Width="400">
-    <Grid>
+    <Border CornerRadius="10"
+            Padding="20"
+            Background="{DynamicResource BackgroundBrush}">
+        <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
             <RowDefinition Height="4*" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="#333238">
-            <TextBlock VerticalAlignment="Center" FontSize="20" Foreground="White" HorizontalAlignment="Center" TextAlignment="Center" Text="Inicio de sesión"/>
+        <Grid Grid.Row="0" Background="{DynamicResource SecondaryBrush}">
+            <TextBlock VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource TextBrush}" HorizontalAlignment="Center" TextAlignment="Center" Text="Inicio de sesión"/>
         </Grid>
         <Grid HorizontalAlignment="Center" Grid.Row="1">
             <StackPanel Margin="0,40,0,0">
@@ -23,10 +26,22 @@
                 <TextBox VerticalAlignment="Center" FontSize="20" Width="150" Height="30" Grid.Row="1" x:Name="MailBox" Margin="5"/>
                 <TextBlock Margin="0,20,0,0" FontSize="30" Text="Contraseña"/>
                 <PasswordBox VerticalAlignment="Center" FontSize="15" Width="150" Height="30" Grid.Row="1" x:Name="PassBox" Margin="5"/>
-                <Button Click="LoginButton" Margin="0,20,0,0" Width="100px" Height="50px" Grid.Row="2" Content="Iniciar sesión" />
+                
+                <Button Background="{DynamicResource HighlightBrush}" Click="LoginButton" Margin="0,20,0,0" Width="100px" Height="50px" Grid.Row="2" Content="Iniciar sesión" />
             </StackPanel>
 
         </Grid>
+            <StackPanel HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Margin="10"
+                        Grid.Column="2"
+                        Grid.Row="2">
+                <Button x:Name="ThemeToggle"
+                              Content="Toggle Theme"
+                              Background="{DynamicResource SecondaryBrush}"
+                              Click="ThemeToggleLogin"/>
+            </StackPanel>
 
-    </Grid>
+        </Grid>
+    </Border>
 </Window>

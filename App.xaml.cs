@@ -10,8 +10,11 @@ namespace DashboardTienda
     /// </summary>
     public partial class App : Application
     {
-        public void ApplyTheme(bool isDarkTheme)
+        public void ApplyTheme()
         {
+            Settings.Default["isDarkTheme"] = !Settings.Default.IsDarkTheme;
+            bool isDarkTheme = !Settings.Default.IsDarkTheme;
+            
             Resources.MergedDictionaries.Clear();
 
             var theme = new ResourceDictionary();
@@ -28,7 +31,7 @@ namespace DashboardTienda
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            ApplyTheme(false);
+            ApplyTheme();
         }
     }
 
