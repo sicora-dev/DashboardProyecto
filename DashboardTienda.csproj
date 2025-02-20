@@ -9,6 +9,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\purchase.png" />
+    <None Remove="Assets\return.png" />
+    <None Remove="Assets\sale.png" />
+    <None Remove="Assets\user.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="{bee4bfec-6683-3e67-9167-3c0cbc68f40a}">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>4</VersionMinor>
@@ -36,6 +43,21 @@
     <PackageReference Include="DotNetEnv" Version="3.1.1" />
     <PackageReference Include="MahApps.Metro.IconPacks.Material" Version="5.1.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\purchase.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\return.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\sale.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Assets\user.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Update=".env">

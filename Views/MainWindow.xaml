@@ -9,6 +9,11 @@
         Title="Dashboard"
         Height="720"
         Width="1280">
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="boolToVisConv"/>
+    </Window.Resources>
+    
     <Border CornerRadius="10"
             Padding="20"
             Background="{DynamicResource BackgroundBrush}">
@@ -48,7 +53,7 @@
                                     CornerRadius="50">
                                 <Border.Effect>
                                     
-                                    <DropShadowEffect BlurRadius="10" Opacity="0.3"></DropShadowEffect>
+                                    <DropShadowEffect Color="{DynamicResource BackgroundColor}" BlurRadius="10" Opacity="0.3"></DropShadowEffect>
                                 </Border.Effect>
                             </Border>
                             <Icon:PackIconMaterial Kind="Information"
@@ -62,7 +67,8 @@
                         </Grid>
                         <TextBlock Text="Dashboard" Foreground="{DynamicResource TextBrush}" FontSize="30">
                             <TextBlock.Effect>
-                                <DropShadowEffect BlurRadius="10"
+                                <DropShadowEffect Color="{DynamicResource BackgroundColor}"
+                                                  BlurRadius="10"
                                                   Opacity="0.3"></DropShadowEffect>
 
                             </TextBlock.Effect>
@@ -109,6 +115,48 @@
 
                 </StackPanel>
         </Border>
+            
+        <!-- Search Bar -->
+            <Border Grid.Column="1" Margin="20 0 20 0" Style="{DynamicResource searchBarBorder}">
+                <Grid>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <Border Width="50" Height="50" CornerRadius="10" Margin="5 0 20 0">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                    <GradientStop Color="{DynamicResource HighlightColor}" Offset="0"/>
+                                    <GradientStop Color="#F46019" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            
+                            <Image Width="40" Height="40" Source="/Assets/user.png"/>
+                        </Border>
+
+                        <StackPanel VerticalAlignment="Center">
+                            <TextBlock Text="Bienvenido" Foreground="{DynamicResource TextBrush}" FontSize="26" FontWeight="Bold" Style="{DynamicResource titleText}"/>
+                            <TextBlock Text="{Binding User.name}" Foreground="{DynamicResource TextBrush}" Margin="0 3 0 0"/>
+                        </StackPanel>
+                        
+                        <!--Serch TextBox-->
+                        <Grid Width="300" HorizontalAlignment="Right">
+                            <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="{DynamicResource TextBrush}" Panel.ZIndex="1" 
+                                       Text="Buscar" IsHitTestVisible="False" 
+                                       Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty.Length, Converter={StaticResource boolToVisConv}}"/>
+                            
+                            <TextBox x:Name="textBoxSearch" Style="{DynamicResource searchTextBox}"/>
+
+                            <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" 
+                                                   Foreground="{DynamicResource HighlightBrush}" Margin=" 0 0 15 0"
+                                                   HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                        </Grid>
+
+                        
+                    </StackPanel>
+                </Grid>
+            </Border>            
+            
+            
+            
+            
         <StackPanel HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="10"
