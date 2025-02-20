@@ -117,7 +117,9 @@
         </Border>
             
         <!-- Search Bar -->
-            <Border Grid.Column="1" Margin="20 0 20 0" Style="{DynamicResource searchBarBorder}">
+            <Border Grid.Column="1"
+                    Margin="20 0 20 0"
+                    Style="{DynamicResource searchTextBox}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Border Width="50" Height="50" CornerRadius="10" Margin="5 0 20 0">
@@ -132,29 +134,40 @@
                         </Border>
 
                         <StackPanel VerticalAlignment="Center">
-                            <TextBlock Text="Bienvenido" Foreground="{DynamicResource TextBrush}" FontSize="26" FontWeight="Bold" Style="{DynamicResource titleText}"/>
-                            <TextBlock Text="{Binding User.name}" Foreground="{DynamicResource TextBrush}" Margin="0 3 0 0"/>
+                            <TextBlock Text="Bienvenido"
+                                       Foreground="{DynamicResource TextBrush}"
+                                       FontSize="26"
+                                       FontWeight="Bold"
+                                       Style="{DynamicResource titleText}" />
+                            <TextBlock Text="{Binding User.name}"
+                                       Foreground="{DynamicResource TextBrush}"
+                                       Margin="0 3 0 0" />
                         </StackPanel>
-                        
-                        <!--Serch TextBox-->
-                        <Grid Width="300" HorizontalAlignment="Right">
-                            <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="{DynamicResource TextBrush}" Panel.ZIndex="1" 
-                                       Text="Buscar" IsHitTestVisible="False" 
-                                       Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty.Length, Converter={StaticResource boolToVisConv}}"/>
-                            
-                            <TextBox x:Name="textBoxSearch" Style="{DynamicResource searchTextBox}"/>
-
-                            <Icon:PackIconMaterial Kind="Magnify" Height="15" Width="15" 
-                                                   Foreground="{DynamicResource HighlightBrush}" Margin=" 0 0 15 0"
-                                                   HorizontalAlignment="Right" VerticalAlignment="Center"/>
-                        </Grid>
-
-                        
                     </StackPanel>
+                    <!--Serch TextBox-->
+                    <Grid Width="300"
+                          HorizontalAlignment="Right">
+                        <TextBlock Margin="15 0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextBrush}"
+                                   Panel.ZIndex="1"
+                                   Text="Buscar"
+                                   IsHitTestVisible="False"
+                                   Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty.Length, Converter={StaticResource boolToVisConv}}" />
+
+                        <TextBox x:Name="textBoxSearch"
+                                 Style="{DynamicResource searchTextBox}" />
+
+                        <Icon:PackIconMaterial Kind="Magnify"
+                                               Height="15"
+                                               Width="15"
+                                               Foreground="{DynamicResource HighlightBrush}"
+                                               Margin=" 0 0 15 0"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Center" />
+                    </Grid>
                 </Grid>
             </Border>            
-            
-            
             
             
         <StackPanel HorizontalAlignment="Right"
