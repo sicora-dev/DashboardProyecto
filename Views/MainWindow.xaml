@@ -117,9 +117,7 @@
         </Border>
             
         <!-- Search Bar -->
-            <Border Grid.Column="1"
-                    Margin="20 0 20 0"
-                    Style="{DynamicResource searchTextBox}">
+            <Border Grid.Column="1" Margin="20 0 20 0" Style="{DynamicResource searchTextBox}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Border Width="50" Height="50" CornerRadius="10" Margin="5 0 20 0">
@@ -169,6 +167,18 @@
                 </Grid>
             </Border>            
             
+        <!-- Info -->
+            <Grid Grid.Column="1" Grid.Row="1" Margin="10 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                
+                <!-- Card -->
+                
+                
+            </Grid>
             
         <StackPanel HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
