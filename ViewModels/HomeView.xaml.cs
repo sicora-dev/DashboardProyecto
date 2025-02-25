@@ -13,16 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace DashboardTienda.UserControls
+namespace DashboardTienda.Views
 {
-    /// <summary>
-    /// Lógica de interacción para Legend.xaml
-    /// </summary>
-    public partial class Legend : UserControl
-    {      
-        public Legend()
+    public partial class HomeView : UserControl
+    {
+        public HomeView()
         {
             InitializeComponent();
         }
     }
 }
+

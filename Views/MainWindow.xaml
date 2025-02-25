@@ -115,6 +115,17 @@
                         </StackPanel>
                     </Button>
 
+                    <TextBlock Text="Configuración" Style="{DynamicResource menuTitle}"/>
+
+                    <Button Style="{DynamicResource menuButton}" Click="ThemeToggleMain">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="ToggleSwitch"
+                               Style="{DynamicResource menuButtonIcon}" />
+                            <TextBlock Text="Cambiar Tema"
+                   Style="{DynamicResource menuButtonText}" />
+                        </StackPanel>
+                    </Button>
+
                 </StackPanel>
             </Border>
 
@@ -169,7 +180,7 @@
                 </Grid>
             </Border>
 
-            <!-- Info Card -->
+            <!-- Main Content -->
             <Grid Grid.Column="1" Grid.Row="1" Margin="10 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
@@ -218,10 +229,10 @@
                                             Values="{Binding Ventas2024}">
                                 <lvc:LineSeries.Stroke>
                                     <LinearGradientBrush>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0"/>
+                                        <GradientStop Color="Transparent" Offset="0"/>
                                         <GradientStop Color="#ff6d48" Offset="0.1"/>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="1.9"/>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="10"/>
+                                        <GradientStop Color="Transparent" Offset="1.9"/>
+                                        <GradientStop Color="Transparent" Offset="10"/>
                                     </LinearGradientBrush>
                                 </lvc:LineSeries.Stroke>
                             </lvc:LineSeries>
@@ -229,10 +240,10 @@
                                             Values="{Binding Ventas2023}">
                                 <lvc:LineSeries.Stroke>
                                     <LinearGradientBrush>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0"/>
+                                        <GradientStop Color="Transparent" Offset="0"/>
                                         <GradientStop Color="#0074ff" Offset="0.1"/>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="1.9"/>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="10"/>
+                                        <GradientStop Color="Transparent" Offset="1.9"/>
+                                        <GradientStop Color="Transparent" Offset="10"/>
                                     </LinearGradientBrush>
                                 </lvc:LineSeries.Stroke>
                             </lvc:LineSeries>
@@ -247,17 +258,55 @@
                 </Grid>
             </Border>
 
+            <!--Right Chart Panel-->
+            <Grid Grid.Column="2" Grid.RowSpan="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Border Style="{DynamicResource whiteBorder}" Margin="0 20 0 0" Grid.Row="1">
+                    <Grid x:Name="rightPanel">
+                        <TextBlock Text="Productos por categoria" Style="{DynamicResource titleText}"/>
 
-            <StackPanel HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="10"
-                    Grid.Column="2"
-                    Grid.Row="2">
-                <Button x:Name="ThemeToggle"
-                          Content="Toggle Theme"
-                          Background="{DynamicResource SecondaryBrush}"
-                          Click="ThemeToggleMain"/>
-            </StackPanel>
+                        <lvc:CartesianChart Grid.Row="1" Margin="0 40 0 30" LegendLocation="None">
+                            <lvc:CartesianChart.DataTooltip>
+                                <lvc:DefaultTooltip Background="#0074ff" Foreground="{DynamicResource TextBrush}"
+                                                    Opacity=".8"/>
+                            </lvc:CartesianChart.DataTooltip>
+                            <lvc:CartesianChart.AxisX>
+                                <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True"
+                                          Title="Categorias" Labels="{Binding Categories}">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator StrokeThickness="0" Step="1"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisX>
+
+                            <lvc:CartesianChart.AxisY>
+                                <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True">
+                                    <lvc:Axis.Separator>
+                                        <lvc:Separator StrokeThickness="0" Step="1"/>
+                                    </lvc:Axis.Separator>
+                                </lvc:Axis>
+                            </lvc:CartesianChart.AxisY>
+
+                            <lvc:CartesianChart.Series>
+                                <lvc:ColumnSeries x:Name="ProductsPerCategoryGraph">
+                                    <lvc:ColumnSeries.Fill>
+                                        <LinearGradientBrush>
+                                            <GradientStop Color="#0074ff" Offset="0.8"/>
+                                            <GradientStop Color="Transparent" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </lvc:ColumnSeries.Fill>
+                                </lvc:ColumnSeries>
+                            </lvc:CartesianChart.Series>
+
+                        </lvc:CartesianChart>
+
+                        <uc:LegendRight HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
+                    </Grid>
+                </Border>
+            </Grid>
         </Grid>
     </Border>
 </Window>

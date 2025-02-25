@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ViewModels\LegendRight.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewModels\Legend.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -14,6 +17,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ViewModels\Login.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\HomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\UsersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -24,10 +33,19 @@
     <Page Update="UserControls\Legend.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UserControls\LegendRight.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Login.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UsersView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
