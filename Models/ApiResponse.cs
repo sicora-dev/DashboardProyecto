@@ -16,5 +16,6 @@ namespace DashboardTienda.Models
         public List<Product> products { get; set; }
         public List<City> cities { get; set; }
         public List<Country> countries { get; set; }
+        public List<User> users { get; set; }
     }
 }

@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ViewModels\UserCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewModels\LegendRight.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -25,8 +28,17 @@
     <Compile Update="ViewModels\UsersView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ViewModels\MainRightPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\UsersRightPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="UserControls\UserCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\InfoCard.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -42,7 +54,13 @@
     <Page Update="Views\Login.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\MainRightPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\UsersRightPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\UsersView.xaml">

@@ -6,121 +6,34 @@
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:DashboardTienda">    
+             xmlns:local="clr-namespace:DashboardTienda">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="130"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- Info Card -->
+        <Grid Margin="10 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+            <!-- Card -->
+            <uc:InfoCard Grid.Column="0" Grid.Row="0" Title="Sales" SubTitle="Compared to ($2646 Last Month)" Amount="3" Image="/Assets/sale.png"/>
+            <uc:InfoCard Grid.Column="1" Grid.Row="0" Title="Purchase" SubTitle="Compared to ($1236 Last Month)" Amount="3" Image="/Assets/purchase.png"/>
+            <uc:InfoCard Grid.Column="2" Grid.Row="0" Title="Return" SubTitle="Compared to (1422 Last Month)" Amount="3" Image="/Assets/return.png"/>
+        </Grid>
+
         <!-- Main Chart Section -->
-        <Border Style="{DynamicResource whiteBorder}" Margin="20 20 20 0">
-            <Grid Margin="15 5">
-                <TextBlock Text="Comparativa Ventas" Style="{DynamicResource titleText}"/>
-                <!--Legend-->
-                <uc:Legend HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 8 10 0"/>
-
-                <!--Chart-->
-                <lvc:CartesianChart Grid.Row="1" Margin="5 40 0 60" LegendLocation="None">
-                    <lvc:CartesianChart.DataTooltip>
-                        <lvc:DefaultTooltip Background="Red" Foreground="{DynamicResource BackgroundBrush}" ShowTitle="False" BulletSize="10" Opacity="0.7"/>
-                    </lvc:CartesianChart.DataTooltip>
-                    <lvc:CartesianChart.AxisX>
-                        <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True" 
-                                  Title="Meses" Labels="{Binding Meses}">
-                            <lvc:Axis.Separator>
-                                <lvc:Separator StrokeThickness="0" Step="1"/>
-                            </lvc:Axis.Separator>
-                        </lvc:Axis>
-                    </lvc:CartesianChart.AxisX>
-
-                    <lvc:CartesianChart.AxisY>
-                        <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True" 
-                                  Title="Cantidad de Ventas">
-                            <lvc:Axis.Separator>
-                                <lvc:Separator StrokeThickness="0" Step="1"/>
-                            </lvc:Axis.Separator>
-                        </lvc:Axis>
-                    </lvc:CartesianChart.AxisY>
-
-                    <lvc:CartesianChart.Series>
-                        <lvc:LineSeries x:Name="Ventas2024Graph" Fill="Transparent" StrokeThickness="3" PointGeometrySize="0"
-                                        Values="{Binding Ventas2024}">
-                            <lvc:LineSeries.Stroke>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="Transparent" Offset="0"/>
-                                    <GradientStop Color="#ff6d48" Offset="0.1"/>
-                                    <GradientStop Color="Transparent" Offset="1.9"/>
-                                    <GradientStop Color="Transparent" Offset="10"/>
-                                </LinearGradientBrush>
-                            </lvc:LineSeries.Stroke>
-                        </lvc:LineSeries>
-                        <lvc:LineSeries x:Name="Ventas2023Graph" Fill="Transparent" StrokeThickness="3" PointGeometrySize="0"
-                                        Values="{Binding Ventas2023}">
-                            <lvc:LineSeries.Stroke>
-                                <LinearGradientBrush>
-                                    <GradientStop Color="Transparent" Offset="0"/>
-                                    <GradientStop Color="#0074ff" Offset="0.1"/>
-                                    <GradientStop Color="Transparent" Offset="1.9"/>
-                                    <GradientStop Color="Transparent" Offset="10"/>
-                                </LinearGradientBrush>
-                            </lvc:LineSeries.Stroke>
-                        </lvc:LineSeries>
-                    </lvc:CartesianChart.Series>
-                </lvc:CartesianChart>
-                <!--Note-->
-                <Grid VerticalAlignment="Bottom" Margin="10 0">
-                    <Icon:PackIconMaterial Kind="Information" Foreground="{DynamicResource HighlightBrush}"/>
-                    <TextBlock TextWrapping="Wrap" Margin="30 0 0 0" LineHeight="18" Foreground="{DynamicResource TextBrush}" Opacity="0.5"
-                               Text="Comparativa de las ventas totales entre 2023 y 2024 sin tener en cuenta las devoluciones"/>
-                </Grid>
-            </Grid>
+        <Border Style="{DynamicResource whiteBorder}" Grid.Row="1" Margin="20 20 20 0">
+            <StackPanel x:Name="UsersPanel" Margin="15 5" Orientation="Vertical">
+                <TextBlock Text="Usuarios" Style="{DynamicResource titleText}"/>
+            </StackPanel>
         </Border>
 
-        <!-- Right Chart Panel -->
-        <Grid Grid.RowSpan="3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
-            <Border Style="{DynamicResource whiteBorder}" Margin="0 20 0 0">
-                <Grid x:Name="rightPanel">
-                    <TextBlock Text="Productos por categoria" Style="{DynamicResource titleText}"/>
-
-                    <lvc:CartesianChart Grid.Row="1" Margin="0 40 0 30" LegendLocation="None">
-                        <lvc:CartesianChart.DataTooltip>
-                            <lvc:DefaultTooltip Background="#0074ff" Foreground="{DynamicResource TextBrush}"
-                                                Opacity=".8"/>
-                        </lvc:CartesianChart.DataTooltip>
-                        <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True"
-                                      Title="Categorias" Labels="{Binding Categories}">
-                                <lvc:Axis.Separator>
-                                    <lvc:Separator StrokeThickness="0" Step="1"/>
-                                </lvc:Axis.Separator>
-                            </lvc:Axis>
-                        </lvc:CartesianChart.AxisX>
-
-                        <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True">
-                                <lvc:Axis.Separator>
-                                    <lvc:Separator StrokeThickness="0" Step="1"/>
-                                </lvc:Axis.Separator>
-                            </lvc:Axis>
-                        </lvc:CartesianChart.AxisY>
-
-                        <lvc:CartesianChart.Series>
-                            <lvc:ColumnSeries x:Name="ProductsPerCategoryGraph">
-                                <lvc:ColumnSeries.Fill>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="#0074ff" Offset="0.8"/>
-                                        <GradientStop Color="Transparent" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </lvc:ColumnSeries.Fill>
-                            </lvc:ColumnSeries>
-                        </lvc:CartesianChart.Series>
-
-                    </lvc:CartesianChart>
-
-                    <uc:LegendRight HorizontalAlignment="Right" VerticalAlignment="Bottom"/>
-                </Grid>
-            </Border>
-        </Grid>
     </Grid>
 </UserControl>
 

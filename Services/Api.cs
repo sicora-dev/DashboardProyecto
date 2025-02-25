@@ -135,6 +135,8 @@ namespace DashboardTienda.Services
                 return null;
             }
         }
+
+
         //private
         private string GetToken()
         {
@@ -182,6 +184,42 @@ namespace DashboardTienda.Services
                 return null;
             }
             
+        }
+        public async Task<ApiResponse?> GetUsers()
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+
+                var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiUrl}/users");
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+                var response = await _httpClient.SendAsync(request);
+                if (response.IsSuccessStatusCode)
+                {
+                    var jsonString = await response.Content.ReadAsStringAsync();
+                    var options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                    if (apiResponse != null)
+                    {
+                        apiResponse.status = (int)response.StatusCode;
+                    }
+                    return apiResponse;
+                }
+                return null;
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
         }
     }
 }

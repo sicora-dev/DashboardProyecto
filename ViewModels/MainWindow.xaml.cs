@@ -21,175 +21,45 @@ namespace DashboardTienda
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class MainWindow : Window
     {
-        public event PropertyChangedEventHandler PropertyChanged;
-        public LogedUser User => TokenService.Instance.User;
-        public List<string> Meses { get; set; }
-        private List<string> _categories;
-        public List<string> Categories
-        {
-            get { return _categories; }
-            set
-            {
-                _categories = value;
-                OnPropertyChanged(nameof(Categories));
-            }
-        }
-        public SeriesCollection SeriesCollection { get; set; }
-
-        public List<Order> Orders { get; set; }
         
-        public ChartValues<int> Ventas2024 { get; set; }
-        public ChartValues<int> Ventas2023 { get; set; }
-        public ChartValues<int> ProductsPerCategory { get; set; }
-
-        private readonly Api api;
+        public LogedUser User => TokenService.Instance.User;
 
         public MainWindow()
         {
             InitializeComponent();
             DataContext = this;
-            
-            api = new Api();
-            LoadOrders();
-            LoadCategories();
-            
-            Meses = new List<string> { "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic" };
+            MainContent.Content = new HomeView();
+            RightPanel.Content = new MainRightPanel();
+
+
         }
 
-
-        private async void LoadOrders()
-        {
-            Orders = await GetOrdersAction();
-
-            int[] ventas2024 = new int[12];
-            int[] ventas2023 = new int[12];
-
-            var orders2024 = Orders.Where(order => order.date.Year == 2024)
-                                   .GroupBy(order => order.date.Month)
-                                   .Select(group => new { Month = group.Key, Count = group.Count() })
-                                   .OrderBy(group => group.Month)
-                                   .ToList();
-
-            var orders2023 = Orders.Where(order => order.date.Year == 2023)
-                                   .GroupBy(order => order.date.Month)
-                                   .Select(group => new { Month = group.Key, Count = group.Count() })
-                                   .OrderBy(group => group.Month)
-                                   .ToList();
-
-            foreach (var order in orders2024)
-            {
-                ventas2024[order.Month - 1] = order.Count;
-            }
-
-            foreach (var order in orders2023)
-            {
-                ventas2023[order.Month - 1] = order.Count;
-            }
-
-            Ventas2024 = new ChartValues<int>(ventas2024);
-            Ventas2023 = new ChartValues<int>(ventas2023);
-
-            Ventas2024Graph.Values = Ventas2024;
-            Ventas2023Graph.Values = Ventas2023;
-        }
-
-        private async void LoadCategories()
-        {
-            List<Category> CategoriesResult = await GetCategoriesAction();
-            List<Product> ProductsResult = await GetProductsAction();
-            int[] products_category = new int[CategoriesResult.Count];
-
-            if (Categories == null)
-            {
-                Categories = new List<string>();
-            }
-            foreach (var category in CategoriesResult)
-            {
-                Categories.Add(category.name);
-            }
-            if (Categories.Count > 0)
-            {
-                foreach (var cat in CategoriesResult)
-                {
-                    var prods = ProductsResult.Count(p => p.category_id == cat.id);
-                    products_category[CategoriesResult.IndexOf(cat)] = prods;
-                }
-            }
-            ProductsPerCategory = new ChartValues<int>(products_category);
-            ProductsPerCategoryGraph.Values = ProductsPerCategory;
-        }
         private void ThemeToggleMain(object sender, RoutedEventArgs e)
         {
             ThemeService.Instance.ToggleTheme();
         }
 
-        private async Task<List<Order>> GetOrdersAction()
+        private void ShowHome(object sender, RoutedEventArgs e)
         {
-            var result = await api.GetOrders();
-
-            if (result?.status == 200)
-            {
-                return result.orders;
-            }
-            else
-            {
-                MessageBox.Show(result?.message ?? "Error al cargar los pedidos.");
-                return new List<Order>();
-            }
-
+            MainContent.Content = new HomeView();
         }
 
-        private async Task<List<Category>> GetCategoriesAction()
+        private void ShowUsers(object sender, RoutedEventArgs e)
         {
-            var result = await api.GetCategories();
-            if (result?.status == 200)
-            {
-                return result.categories;
-            }
-            else
-            {
-                MessageBox.Show(result?.message ?? "Error al cargar las categorías.");
-                return new List<Category>();
-            }
+            MainContent.Content = new UsersView();
         }
 
-        private async Task<List<Product>> GetProductsByCategoryAction(int category_id)
+        private void ShowProducts(object sender, RoutedEventArgs e)
         {
-            var result = await api.GetProductsByCategory(category_id);
-            if (result?.status == 200)
-            {
-                return result.products;
-            }
-            else
-            {
-                MessageBox.Show(result?.message ?? "Error al cargar las categorías.");
-                return new List<Product>();
-            }
+            // Implementar la vista de Productos si es necesario
         }
 
-        private async Task<List<Product>> GetProductsAction()
+        private void ShowOrders(object sender, RoutedEventArgs e)
         {
-            var result = await api.GetProducts();
-            if (result?.status == 200)
-            {
-                return result.products;
-            }
-            else
-            {
-                MessageBox.Show(result?.message ?? "Error al cargar las categorías.");
-                return new List<Product>();
-            }
+            // Implementar la vista de Pedidos si es necesario
         }
-
-        
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
 
     }
 }
