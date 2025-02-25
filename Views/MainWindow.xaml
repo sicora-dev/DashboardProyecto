@@ -2,6 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:uc="clr-namespace:DashboardTienda.UserControls"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DashboardTienda"
@@ -13,32 +15,32 @@
     <Window.Resources>
         <BooleanToVisibilityConverter x:Key="boolToVisConv"/>
     </Window.Resources>
-    
+
     <Border CornerRadius="10"
             Padding="20"
             Background="{DynamicResource BackgroundBrush}">
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="220" />
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="260"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="120"></RowDefinition>
-            <RowDefinition Height="130"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Border x:Name="NavBar"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="220" />
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="260"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="130"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border x:Name="NavBar"
         Style="{DynamicResource NavBar}"
         Grid.RowSpan="3"
         CornerRadius="10">
-            <Border.Background>
+                <Border.Background>
                     <LinearGradientBrush>
                         <GradientStop Color="{DynamicResource HighlightColor}" Offset="0.4"/>
                         <GradientStop Color="#F46019" Offset="1"/>
                     </LinearGradientBrush>
-            </Border.Background>
-            <StackPanel>
+                </Border.Background>
+                <StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 30 0 10">
                         <Grid>
                             <Border Background="{DynamicResource TextBrush}"
@@ -52,7 +54,7 @@
                                     BorderThickness="3"
                                     CornerRadius="50">
                                 <Border.Effect>
-                                    
+
                                     <DropShadowEffect Color="{DynamicResource BackgroundColor}" BlurRadius="10" Opacity="0.3"></DropShadowEffect>
                                 </Border.Effect>
                             </Border>
@@ -74,9 +76,9 @@
                             </TextBlock.Effect>
                         </TextBlock>
                     </StackPanel>
-                
+
                     <TextBlock Text="Menú" Style="{DynamicResource menuTitle}"/>
-                
+
                     <!-- Menu Buttons -->
                     <Button Style="{DynamicResource menuButton}">
                         <StackPanel Orientation="Horizontal">
@@ -114,10 +116,10 @@
                     </Button>
 
                 </StackPanel>
-        </Border>
-            
-        <!-- Search Bar -->
-            <Border Grid.Column="1" Margin="20 0 20 0" Style="{DynamicResource searchTextBox}">
+            </Border>
+
+            <!-- Search Bar -->
+            <Border Grid.Column="1" Margin="20 0 20 0" Style="{DynamicResource searchBarBorder}">
                 <Grid>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Border Width="50" Height="50" CornerRadius="10" Margin="5 0 20 0">
@@ -127,7 +129,7 @@
                                     <GradientStop Color="#F46019" Offset="1"/>
                                 </LinearGradientBrush>
                             </Border.Background>
-                            
+
                             <Image Width="40" Height="40" Source="/Assets/user.png"/>
                         </Border>
 
@@ -165,31 +167,97 @@
                                                VerticalAlignment="Center" />
                     </Grid>
                 </Grid>
-            </Border>            
-            
-        <!-- Info -->
+            </Border>
+
+            <!-- Info Card -->
             <Grid Grid.Column="1" Grid.Row="1" Margin="10 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                
+
                 <!-- Card -->
-                
-                
+                <uc:InfoCard Grid.Column="0" Title="Sales" SubTitle="Compared to ($2646 Last Month)" Amount="3" Image="/Assets/sale.png"/>
+                <uc:InfoCard Grid.Column="1" Title="Purchase" SubTitle="Compared to ($1236 Last Month)" Amount="3" Image="/Assets/purchase.png"/>
+                <uc:InfoCard Grid.Column="2" Title="Return" SubTitle="Compared to (1422 Last Month)" Amount="3" Image="/Assets/return.png"/>
+
             </Grid>
-            
-        <StackPanel HorizontalAlignment="Right"
+            <!--Main Chart Section-->
+            <Border Grid.Column="1" Grid.Row="2" Style="{DynamicResource whiteBorder}" Margin="20 20 20 0">
+                <Grid Margin="15 5">
+                    <TextBlock Text="Comparativa Ventas" Style="{DynamicResource titleText}"/>
+                    <!--Legend-->
+                    <uc:Legend HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 8 10 0"/>
+
+                    <!--Chart-->
+                    <lvc:CartesianChart Grid.Row="1" Margin="5 40 0 60" LegendLocation="None">
+                        <lvc:CartesianChart.DataTooltip>
+                            <lvc:DefaultTooltip Background="Red" Foreground="{DynamicResource BackgroundBrush}" ShowTitle="False" BulletSize="10" Opacity="0.7"/>
+                        </lvc:CartesianChart.DataTooltip>
+                        <lvc:CartesianChart.AxisX>
+                            <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True" 
+                                      Title="Meses" Labels="{Binding Meses}">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator StrokeThickness="0" Step="1"/>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisX>
+
+                        <lvc:CartesianChart.AxisY>
+                            <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True" 
+                                      Title="Cantidad de Ventas">
+                                <lvc:Axis.Separator>
+                                    <lvc:Separator StrokeThickness="0" Step="1"/>
+                                </lvc:Axis.Separator>
+                            </lvc:Axis>
+                        </lvc:CartesianChart.AxisY>
+
+                        <lvc:CartesianChart.Series>
+                            <lvc:LineSeries x:Name="Ventas2024Graph" Fill="Transparent" StrokeThickness="3" PointGeometrySize="0"
+                                            Values="{Binding Ventas2024}">
+                                <lvc:LineSeries.Stroke>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0"/>
+                                        <GradientStop Color="#ff6d48" Offset="0.1"/>
+                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="1.9"/>
+                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="10"/>
+                                    </LinearGradientBrush>
+                                </lvc:LineSeries.Stroke>
+                            </lvc:LineSeries>
+                            <lvc:LineSeries x:Name="Ventas2023Graph" Fill="Transparent" StrokeThickness="3" PointGeometrySize="0"
+                                            Values="{Binding Ventas2023}">
+                                <lvc:LineSeries.Stroke>
+                                    <LinearGradientBrush>
+                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0"/>
+                                        <GradientStop Color="#0074ff" Offset="0.1"/>
+                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="1.9"/>
+                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="10"/>
+                                    </LinearGradientBrush>
+                                </lvc:LineSeries.Stroke>
+                            </lvc:LineSeries>
+                        </lvc:CartesianChart.Series>
+                    </lvc:CartesianChart>
+                    <!--Note-->
+                    <Grid VerticalAlignment="Bottom" Margin="10 0">
+                        <Icon:PackIconMaterial Kind="Information" Foreground="{DynamicResource HighlightBrush}"/>
+                        <TextBlock TextWrapping="Wrap" Margin="30 0 0 0" LineHeight="18" Foreground="{DynamicResource TextBrush}" Opacity="0.5"
+                                   Text="Comparativa de las ventas totales entre 2023 y 2024 sin tener en cuenta las devoluciones"/>
+                    </Grid>
+                </Grid>
+            </Border>
+
+
+            <StackPanel HorizontalAlignment="Right"
                     VerticalAlignment="Bottom"
                     Margin="10"
                     Grid.Column="2"
                     Grid.Row="2">
-            <Button x:Name="ThemeToggle"
+                <Button x:Name="ThemeToggle"
                           Content="Toggle Theme"
                           Background="{DynamicResource SecondaryBrush}"
                           Click="ThemeToggleMain"/>
-        </StackPanel>
-    </Grid>
+            </StackPanel>
+        </Grid>
     </Border>
 </Window>

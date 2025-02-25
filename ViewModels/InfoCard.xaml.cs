@@ -23,6 +23,7 @@ namespace DashboardTienda.UserControls
         public InfoCard()
         {
             InitializeComponent();
+
         }
 
         public string Title
@@ -55,6 +56,6 @@ namespace DashboardTienda.UserControls
             set { SetValue(ImageProperty, value); }
         }
         public static readonly DependencyProperty ImageProperty =
-            DependencyProperty.Register("Image", typeof(string), typeof(InfoCard));
+            DependencyProperty.Register("Image", typeof(ImageSource), typeof(InfoCard));
     }
 }
