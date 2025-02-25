@@ -39,14 +39,52 @@ namespace DashboardTienda.Services
             return apiResponse;
 
         }
-        
+
 
         //private
-
+        private string GetToken()
+        {
+            return TokenService.Instance.Token;
+        }
         public async Task<ApiResponse?> GetUserById(string id)
         {
-            
+
             var httpResponse = await _httpClient.GetAsync($"{_apiUrl}/user/{id}");
+            return null;
+        }
+
+        public async Task<ApiResponse?> GetProducts()
+        {
+            var httpResponse = await _httpClient.GetAsync($"{_apiUrl}/products");
+            return null;
+        }
+
+        public async Task<ApiResponse?> GetOrders()
+        {
+            var token = GetToken() ?? string.Empty;
+            if (string.IsNullOrEmpty(token))
+            {
+                return null;
+            }
+
+            var request = new HttpRequestMessage(HttpMethod.Get, $"{_apiUrl}/orders");
+            request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+
+            var response = await _httpClient.SendAsync(request);
+            if (response.IsSuccessStatusCode)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+            }
             return null;
         }
     }
