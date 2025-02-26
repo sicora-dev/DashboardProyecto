@@ -49,6 +49,7 @@ namespace DashboardTienda
         private void ShowUsers(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new UsersView();
+            RightPanel.Content = new UsersRightPanel();
         }
 
         private void ShowProducts(object sender, RoutedEventArgs e)

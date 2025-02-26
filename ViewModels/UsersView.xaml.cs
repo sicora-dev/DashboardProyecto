@@ -37,6 +37,7 @@ namespace DashboardTienda.Views
                 userCard.UserName = user.name;
                 userCard.Mail = user.mail;
                 userCard.Role = user.role;
+                userCard.MouseLeftButtonUp += (s, e) => UserSelectionService.Instance.SelectedUser = user;
                 UsersPanel.Children.Add(userCard);
             }
 

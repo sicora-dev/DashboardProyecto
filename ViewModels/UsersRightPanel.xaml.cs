@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using DashboardTienda.Services;
 
 namespace DashboardTienda.Views
 {
@@ -20,9 +21,12 @@ namespace DashboardTienda.Views
     /// </summary>
     public partial class UsersRightPanel : UserControl
     {
+        public string SelectedName { get; set; }
+        
         public UsersRightPanel()
         {
             InitializeComponent();
+            DataContext = UserSelectionService.Instance;
         }
     }
 }

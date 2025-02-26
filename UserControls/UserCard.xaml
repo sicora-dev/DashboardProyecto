@@ -8,7 +8,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:DashboardTienda">
 
-    <Border Height="65" CornerRadius="10" Padding="3" Margin="0 10" VerticalAlignment="Center">
+    <Border Height="65" CornerRadius="10" Padding="3" Margin="0 10" VerticalAlignment="Center" Width="auto">
         <Border.Style>
             <Style TargetType="Border">
                 <Style.Triggers>
@@ -23,7 +23,7 @@
         </Border.Style>
 
         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-            <Border Width="50" Height="50" CornerRadius="10" Margin="0 0 10 0">
+            <Border Width="50" Height="50" CornerRadius="10" Margin="5">
                 <Border.Background>
                     <LinearGradientBrush>
                         <GradientStop Color="#0074ff" Offset="0"/>
@@ -34,8 +34,8 @@
                 <Image Width="38" Height="38" Source="{Binding ElementName=userCard, Path=Image}"/>
             </Border>
 
-            <StackPanel>
-                <StackPanel >
+            <StackPanel VerticalAlignment="Center">
+                <StackPanel>
                     <TextBlock FontWeight="SemiBold" FontSize="13" Foreground="{DynamicResource TextBrush}" Text="{Binding UserName, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
                     <TextBlock FontWeight="SemiBold" FontSize="8" Foreground="{DynamicResource TextBrush}" Opacity=".8" Text="{Binding Mail, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
                 </StackPanel>

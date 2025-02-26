@@ -29,9 +29,12 @@
 
         <!-- Main Chart Section -->
         <Border Style="{DynamicResource whiteBorder}" Grid.Row="1" Margin="20 20 20 0">
-            <StackPanel x:Name="UsersPanel" Margin="15 5" Orientation="Vertical">
-                <TextBlock Text="Usuarios" Style="{DynamicResource titleText}"/>
-            </StackPanel>
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="UsersPanel" Margin="15 5" Orientation="Vertical">
+                    <TextBlock Text="Usuarios" Style="{DynamicResource titleText}"/>
+                </StackPanel>
+            </ScrollViewer>
+            
         </Border>
 
     </Grid>
