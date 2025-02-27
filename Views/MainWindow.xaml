@@ -115,14 +115,14 @@
                         </StackPanel>
                     </Button>
 
-                    <!--<Button Style="{DynamicResource menuButton}" Click="ShowComments">
+                    <Button Style="{DynamicResource menuButton}" Click="ShowComments">
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="CommentOutline"
                                 Style="{DynamicResource menuButtonIcon}" />
                             <TextBlock Text="Comentarios"
                                     Style="{DynamicResource menuButtonText}" />
                         </StackPanel>
-                    </Button>-->
+                    </Button>
 
                     <TextBlock Text="Configuración" Style="{DynamicResource menuTitle}"/>
 

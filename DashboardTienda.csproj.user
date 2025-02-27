@@ -7,6 +7,9 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ViewModels\CommentCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewModels\OrderCard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -52,8 +55,17 @@
     <Compile Update="ViewModels\OrdersRightPanel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ViewModels\CommentsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\CommentsRightPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="UserControls\CommentCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\OrderCard.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -70,6 +82,12 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\LegendRight.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CommentsRightPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\CommentsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\HomeView.xaml">

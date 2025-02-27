@@ -15,6 +15,7 @@ namespace DashboardTienda.Models
         public required int city_id { get; set; }
         public required int country_id { get; set; }
         public required bool blocked { get; set; }
+        public required string block_date { get; set; }
         public required string role { get; set; }
     }
 }

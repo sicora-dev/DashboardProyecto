@@ -41,6 +41,16 @@ namespace DashboardTienda.Views
                 txtCiudad.Text = UserSelectionService.Instance.SelectedUser.city_id.ToString();
                 txtPais.Text = UserSelectionService.Instance.SelectedUser.country_id.ToString();
                 txtRol.Text = UserSelectionService.Instance.SelectedUser.role;
+                txtBlocked.Text = UserSelectionService.Instance.SelectedUser.blocked.ToString();
+                if (UserSelectionService.Instance.SelectedUser.block_date != "none")
+                {
+                    var date = UserSelectionService.Instance.SelectedUser.block_date.Split('T')[0];
+                    txtBlockDate.Text = date;
+                }
+                else
+                {
+                    txtBlockDate.Text = UserSelectionService.Instance.SelectedUser.block_date;
+                }
             }
 
         }
@@ -56,12 +66,37 @@ namespace DashboardTienda.Views
                 city_id = int.Parse(txtCiudad.Text),
                 country_id = int.Parse(txtPais.Text),
                 blocked = UserSelectionService.Instance.SelectedUser.blocked,
+                block_date = UserSelectionService.Instance.SelectedUser.block_date,
                 role = txtRol.Text
             };
             var result = await api.UpdateUser(originalMail, updatedUser);
             MessageBox.Show(result?.message);
             
             
+        }
+
+        public async void OnUserBan(object sender, RoutedEventArgs e)
+        {
+            var result = await api.BanUser(UserSelectionService.Instance.SelectedUser._id);
+            MessageBox.Show(result?.message);
+        }
+
+        public async void OnUserUnBan(object sender, RoutedEventArgs e)
+        {
+            var result = await api.UnBanUser(UserSelectionService.Instance.SelectedUser._id);
+            MessageBox.Show(result?.message);
+        }
+
+        public async void OnUserGrant(object sender, RoutedEventArgs e)
+        {
+            var result = await api.GrantAdmin(UserSelectionService.Instance.SelectedUser._id);
+            MessageBox.Show(result?.message);
+        }
+
+        public async void OnUserRevoke(object sender, RoutedEventArgs e)
+        {
+            var result = await api.RevokeAdmin(UserSelectionService.Instance.SelectedUser._id);
+            MessageBox.Show(result?.message);
         }
     }
 }

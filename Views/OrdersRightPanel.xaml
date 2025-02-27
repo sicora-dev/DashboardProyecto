@@ -20,10 +20,10 @@
                 <StackPanel Orientation="Vertical" x:Name="rightPanel">
                     <TextBlock Text="Información del Pedido" Style="{DynamicResource titleText}"/>
 
-                    <TextBlock Text="{Binding SelectedProduct.name}" Style="{DynamicResource menuTitle}" />
+                    <TextBlock Text="{Binding SelectedOrder._id}" Style="{DynamicResource menuTitle}" />
                     <TextBlock Text="Productos" Style="{DynamicResource menuTitle}"></TextBlock>
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
-                        <ItemsControl ItemsSource="{Binding SelectedOrder.items}">
+                    <StackPanel x:Name="FormOrders" Orientation="Vertical" VerticalAlignment="Center">
+                        <ItemsControl x:Name="OriginalFields" ItemsSource="{Binding SelectedOrder.items}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
@@ -59,7 +59,14 @@
                         </ItemsControl>
                     </StackPanel>
 
-
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 10">
+                        <Button Style="{DynamicResource sendButton}" Click="OnAddProduct">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Añadir" Style="{DynamicResource menuButtonText}" />
+                                <Icon:PackIconMaterial Kind="Plus" Style="{DynamicResource menuButtonIcon}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 10">
                         <Button Style="{DynamicResource sendButton}" Click="OnSubmit">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

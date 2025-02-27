@@ -85,18 +85,60 @@
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center">
                         <TextBlock Text="Rol" Style="{DynamicResource menuTitle}"></TextBlock>
                         <Grid Width="200" HorizontalAlignment="center">
-                            <TextBox x:Name="txtRol" Text="{Binding SelectedUser.role}" Style="{DynamicResource searchTextBox}" />
-
-                            <Icon:PackIconMaterial Kind="Rename"
-                                   Height="15"
-                                   Width="15"
-                                   Foreground="{DynamicResource HighlightBrush}"
-                                   Margin=" 0 0 15 0"
-                                   HorizontalAlignment="Right"
-                                   VerticalAlignment="Center" />
+                            <TextBox x:Name="txtRol" Text="{Binding SelectedUser.role}" Style="{DynamicResource searchTextBox}" IsReadOnly="True"/>
                         </Grid>
                     </StackPanel>
-                
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="Bloqueado" Style="{DynamicResource menuTitle}"></TextBlock>
+                        <Grid Width="200" HorizontalAlignment="center">
+                            <TextBox x:Name="txtBlocked" Text="{Binding SelectedUser.blocked}" Style="{DynamicResource searchTextBox}" IsReadOnly="True"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="Fecha de bloqueo" Style="{DynamicResource menuTitle}"></TextBlock>
+                        <Grid Width="200" HorizontalAlignment="center">
+                            <TextBox x:Name="txtBlockDate" Text="{Binding SelectedUser.block_date}" Style="{DynamicResource searchTextBox}" IsReadOnly="True"/>
+                        </Grid>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 10">
+                        <Button Style="{DynamicResource sendButton}" Click="OnUserBan">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Banear Usuario" Style="{DynamicResource menuButtonText}" />
+                                <Icon:PackIconMaterial Kind="Send" Style="{DynamicResource menuButtonIcon}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 10">
+                        <Button Style="{DynamicResource sendButton}" Click="OnUserUnBan">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="UnBanear Usuario" Style="{DynamicResource menuButtonText}" />
+                                <Icon:PackIconMaterial Kind="Send" Style="{DynamicResource menuButtonIcon}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 10">
+                        <Button Style="{DynamicResource sendButton}" Click="OnUserGrant">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Grant Admin" Style="{DynamicResource menuButtonText}" />
+                                <Icon:PackIconMaterial Kind="Send" Style="{DynamicResource menuButtonIcon}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 10">
+                        <Button Style="{DynamicResource sendButton}" Click="OnUserRevoke">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <TextBlock Text="Revoke Admin" Style="{DynamicResource menuButtonText}" />
+                                <Icon:PackIconMaterial Kind="Send" Style="{DynamicResource menuButtonIcon}" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+
                     <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="0 10">
                         <Button Style="{DynamicResource sendButton}" Click="OnSubmit">
                             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

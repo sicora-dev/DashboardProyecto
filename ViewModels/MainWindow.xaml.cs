@@ -67,5 +67,12 @@ namespace DashboardTienda
             RightPanel.Content = new OrdersRightPanel();
         }
 
+        private void ShowComments(object sender, RoutedEventArgs e)
+        {
+           
+            MainContent.Content = new CommentsView();
+            RightPanel.Content = new CommentsRightPanel();
+        }
+
     }
 }

@@ -105,6 +105,34 @@ namespace DashboardTienda.Services
             }
         }
 
+        public async Task<ApiResponse?> GetComments()
+        {
+            try
+            {
+                var response = await _httpClient.GetAsync($"{_apiUrl}/comments");
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
+
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+
+        }
+
         public async Task<ApiResponse?> GetProductsByCategory(int category_id)
         {
             try
@@ -315,6 +343,186 @@ namespace DashboardTienda.Services
                 {
                     Content = content
                 };
+
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.SendAsync(request);
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+        }
+
+        public async Task<ApiResponse?> BanUser(string user_id)
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+                var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/user/block/{user_id}");
+
+
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.SendAsync(request);
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+        }
+
+        public async Task<ApiResponse?> UnBanUser(string user_id)
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+                var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/user/unblock/{user_id}");
+
+
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.SendAsync(request);
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+        }
+
+        public async Task<ApiResponse?> GrantAdmin(string user_id)
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+                var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/user/grant_admin/{user_id}");
+
+
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.SendAsync(request);
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+        }
+
+        public async Task<ApiResponse?> RevokeAdmin(string user_id)
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+                var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/user/revoke_admin/{user_id}");
+
+
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.SendAsync(request);
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+        }
+
+        public async Task<ApiResponse?> DeleteComment(string comment_id)
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+                var request = new HttpRequestMessage(HttpMethod.Delete, $"{_apiUrl}/comment/{comment_id}");
+                
 
 
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);

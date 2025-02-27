@@ -52,6 +52,11 @@ namespace DashboardTienda.Views
 
         private async void LoadProducts()
         {
+            if (Categories == null)
+            {
+                // Handle the null case, e.g., initialize or load categories
+                LoadCategories();
+            }
             List<Product> Products = await GetProductsAction();
             foreach (var product in Products)
             {
