@@ -12,5 +12,6 @@ namespace DashboardTienda.Models
         public required string product_id { get; set; }
         public int quantity { get; set; }
         public required string size { get; set; }
+        public string product_name { get; set; }
     }
 }

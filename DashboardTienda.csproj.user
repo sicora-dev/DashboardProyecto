@@ -7,6 +7,12 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="ViewModels\OrderCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ProductCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="ViewModels\UserCard.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -34,8 +40,26 @@
     <Compile Update="ViewModels\UsersRightPanel.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="ViewModels\ProductsView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\ProductsRightPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\OrdersView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ViewModels\OrdersRightPanel.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="UserControls\OrderCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UserControls\ProductCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UserControls\UserCard.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -58,6 +82,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrdersRightPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\OrdersView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ProductsRightPanel.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\UsersRightPanel.xaml">

@@ -39,6 +39,7 @@ namespace DashboardTienda.Views
         public HomeView()
         {
             InitializeComponent();
+            DataContext = this;
             api = new Api();
             LoadOrders();
 

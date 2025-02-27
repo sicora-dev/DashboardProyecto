@@ -43,6 +43,11 @@ namespace DashboardTienda.Views
 
         }
 
+        public void RefreshUsers(object sender, RoutedEventArgs e)
+        {
+            UsersPanel.Children.Clear();
+            LoadUsers();
+        }
         private async Task<List<User>> GetUsersAction()
         {
             var result = await api.GetUsers();

@@ -59,7 +59,7 @@
 
                     <lvc:CartesianChart.Series>
                         <lvc:LineSeries x:Name="Ventas2024Graph" Fill="Transparent" StrokeThickness="3" PointGeometrySize="0"
-                                        Values="{Binding Ventas2024}">
+                                        Values="{Binding Ventas2024, RelativeSource={RelativeSource AncestorType=UserControl}}">
                             <lvc:LineSeries.Stroke>
                                 <LinearGradientBrush>
                                     <GradientStop Color="Transparent" Offset="0"/>
@@ -70,7 +70,7 @@
                             </lvc:LineSeries.Stroke>
                         </lvc:LineSeries>
                         <lvc:LineSeries x:Name="Ventas2023Graph" Fill="Transparent" StrokeThickness="3" PointGeometrySize="0"
-                                        Values="{Binding Ventas2023}">
+                                        Values="{Binding Ventas2023, RelativeSource={RelativeSource AncestorType=UserControl}}">
                             <lvc:LineSeries.Stroke>
                                 <LinearGradientBrush>
                                     <GradientStop Color="Transparent" Offset="0"/>

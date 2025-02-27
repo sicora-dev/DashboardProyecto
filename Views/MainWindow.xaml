@@ -115,11 +115,20 @@
                         </StackPanel>
                     </Button>
 
+                    <!--<Button Style="{DynamicResource menuButton}" Click="ShowComments">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="CommentOutline"
+                                Style="{DynamicResource menuButtonIcon}" />
+                            <TextBlock Text="Comentarios"
+                                    Style="{DynamicResource menuButtonText}" />
+                        </StackPanel>
+                    </Button>-->
+
                     <TextBlock Text="Configuración" Style="{DynamicResource menuTitle}"/>
 
                     <Button Style="{DynamicResource menuButton}" Click="ThemeToggleMain">
                         <StackPanel Orientation="Horizontal">
-                            <Icon:PackIconMaterial Kind="ToggleSwitch"
+                            <Icon:PackIconMaterial Kind="ToggleSwitchOutline"
                                Style="{DynamicResource menuButtonIcon}" />
                             <TextBlock Text="Cambiar Tema"
                    Style="{DynamicResource menuButtonText}" />

@@ -37,6 +37,7 @@ namespace DashboardTienda.Views
         public MainRightPanel()
         {
             InitializeComponent();
+            DataContext = this;
             api = new Api();
             LoadCategories();
         }

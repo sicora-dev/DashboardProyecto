@@ -53,21 +53,19 @@ namespace DashboardTienda.Services
             try
             {
                 var response = await _httpClient.GetAsync($"{_apiUrl}/products");
-                if (response.IsSuccessStatusCode)
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
                 {
-                    var jsonString = await response.Content.ReadAsStringAsync();
-                    var options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    };
-                    var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
-                    if (apiResponse != null)
-                    {
-                        apiResponse.status = (int)response.StatusCode;
-                    }
-                    return apiResponse;
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
                 }
-                return null;
+                return apiResponse;
+
 
             }
             catch
@@ -75,7 +73,7 @@ namespace DashboardTienda.Services
                 MessageBox.Show("Error de conexión");
                 return null;
             }
-            
+
         }
 
         public async Task<ApiResponse?> GetCategories()
@@ -98,7 +96,7 @@ namespace DashboardTienda.Services
                     return apiResponse;
                 }
                 return null;
-                
+
             }
             catch
             {
@@ -183,7 +181,7 @@ namespace DashboardTienda.Services
                 MessageBox.Show("Error de conexión");
                 return null;
             }
-            
+
         }
         public async Task<ApiResponse?> GetUsers()
         {
@@ -214,6 +212,126 @@ namespace DashboardTienda.Services
                     return apiResponse;
                 }
                 return null;
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+        }
+
+        public async Task<ApiResponse?> UpdateUser(string originalMail, User updatedUser)
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+                var userJson = JsonSerializer.Serialize(updatedUser);
+                var content = new StringContent(userJson, Encoding.UTF8, "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/user/{originalMail}")
+                {
+                    Content = content
+                };
+
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.SendAsync(request);
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+        }
+
+        public async Task<ApiResponse?> UpdateProduct(Product updatedProduct)
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+                var userJson = JsonSerializer.Serialize(updatedProduct);
+                var content = new StringContent(userJson, Encoding.UTF8, "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/product/{updatedProduct._id}")
+                {
+                    Content = content
+                };
+
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.SendAsync(request);
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
+            }
+            catch
+            {
+                MessageBox.Show("Error de conexión");
+                return null;
+            }
+        }
+
+        public async Task<ApiResponse?> UpdateOrder(Order updatedOrder)
+        {
+            try
+            {
+                var token = GetToken() ?? string.Empty;
+                if (string.IsNullOrEmpty(token))
+                {
+                    return null;
+                }
+                var userJson = JsonSerializer.Serialize(updatedOrder);
+                var content = new StringContent(userJson, Encoding.UTF8, "application/json");
+                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/order/{updatedOrder._id}")
+                {
+                    Content = content
+                };
+
+
+                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
+                var response = await _httpClient.SendAsync(request);
+
+                var jsonString = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
+                if (apiResponse != null)
+                {
+                    apiResponse.status = (int)response.StatusCode;
+                }
+                return apiResponse;
+
             }
             catch
             {

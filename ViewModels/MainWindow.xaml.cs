@@ -44,6 +44,7 @@ namespace DashboardTienda
         private void ShowHome(object sender, RoutedEventArgs e)
         {
             MainContent.Content = new HomeView();
+            RightPanel.Content = new MainRightPanel();
         }
 
         private void ShowUsers(object sender, RoutedEventArgs e)
@@ -55,11 +56,15 @@ namespace DashboardTienda
         private void ShowProducts(object sender, RoutedEventArgs e)
         {
             // Implementar la vista de Productos si es necesario
+            MainContent.Content = new ProductsView();
+            RightPanel.Content = new ProductsRightPanel();
         }
 
         private void ShowOrders(object sender, RoutedEventArgs e)
         {
             // Implementar la vista de Pedidos si es necesario
+            MainContent.Content = new OrdersView();
+            RightPanel.Content = new OrdersRightPanel();
         }
 
     }
