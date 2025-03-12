@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,18 +27,19 @@ namespace DashboardTienda.Views
     {
         private readonly Api api;
         private List<Category> Categories;
+        private List<Product> Products;
         public ProductsView()
         {
             InitializeComponent();
             api = new Api();
             LoadCategories();
             LoadProducts();
+            SearchService.Instance.PropertyChanged += OnSearchTextChanged;
         }
 
-        private async void LoadCategories()
+        private async Task LoadCategories()
         {
             List<Category> CategoriesResult = await GetCategoriesAction();
-
 
             if (Categories == null)
             {
@@ -47,29 +49,48 @@ namespace DashboardTienda.Views
             {
                 Categories.Add(category);
             }
-           
         }
 
-        private async void LoadProducts()
+        private async Task LoadProducts()
         {
-            if (Categories == null)
+            ProductsPanel.Children.Clear();
+            if (Categories == null || !Categories.Any())
             {
-                // Handle the null case, e.g., initialize or load categories
-                LoadCategories();
+                await LoadCategories();
             }
-            List<Product> Products = await GetProductsAction();
-            foreach (var product in Products)
+            if (Products == null)
             {
-                var categoryName = Categories.FirstOrDefault(cat => cat.id == product.category_id)?.name;
-                ProductCard productCard = new ProductCard();
-                productCard.ProductName = product.name;
-                productCard.Category = categoryName;
-                productCard.Price = product.price;
-                productCard.Image = product.img;
-                productCard.MouseLeftButtonUp += (s, e) => ProductSelectionService.Instance.SelectedProduct = product;
-                ProductsPanel.Children.Add(productCard);
+                Products = await GetProductsAction();
             }
 
+            foreach (var product in Products)
+            {
+                if (SearchService.Instance.SearchText != null)
+                {
+                    if (product.name.Contains(SearchService.Instance.SearchText))
+                    {
+                        var categoryName = Categories?.FirstOrDefault(cat => cat.id == product.category_id)?.name ?? string.Empty;
+                        ProductCard productCard = new ProductCard();
+                        productCard.ProductName = product.name;
+                        productCard.Category = categoryName;
+                        productCard.Price = product.price;
+                        productCard.Image = product.img;
+                        productCard.MouseLeftButtonUp += (s, e) => ProductSelectionService.Instance.SelectedProduct = product;
+                        ProductsPanel.Children.Add(productCard);
+                    }
+                }
+                else
+                {
+                    var categoryName = Categories?.FirstOrDefault(cat => cat.id == product.category_id)?.name ?? string.Empty;
+                    ProductCard productCard = new ProductCard();
+                    productCard.ProductName = product.name;
+                    productCard.Category = categoryName;
+                    productCard.Price = product.price;
+                    productCard.Image = product.img;
+                    productCard.MouseLeftButtonUp += (s, e) => ProductSelectionService.Instance.SelectedProduct = product;
+                    ProductsPanel.Children.Add(productCard);
+                }
+            }
         }
 
         private async Task<List<Category>> GetCategoriesAction()
@@ -86,9 +107,10 @@ namespace DashboardTienda.Views
             }
         }
 
-        public void RefreshUsers(object sender, RoutedEventArgs e)
+        public async void RefreshUsers(object sender, RoutedEventArgs e)
         {
             ProductsPanel.Children.Clear();
+            Products = await GetProductsAction();
             LoadProducts();
         }
         private async Task<List<Product>> GetProductsAction()
@@ -103,6 +125,14 @@ namespace DashboardTienda.Views
             {
                 MessageBox.Show(result?.message ?? "Error al cargar los usuarios.");
                 return new List<Product>();
+            }
+        }
+
+        private void OnSearchTextChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SearchService.SearchText))
+            {
+                LoadProducts();
             }
         }
     }

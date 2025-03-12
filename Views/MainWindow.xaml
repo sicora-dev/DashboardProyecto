@@ -172,10 +172,21 @@
                                    Foreground="{DynamicResource TextBrush}"
                                    Panel.ZIndex="1"
                                    Text="Buscar"
-                                   IsHitTestVisible="False"
-                                   Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty.Length, Converter={StaticResource boolToVisConv}}" />
+                                   IsHitTestVisible="False" >
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=textBoxSearch}" Value="0">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
 
                         <TextBox x:Name="textBoxSearch"
+                                 TextChanged="Search"
                                  Style="{DynamicResource searchTextBox}" />
 
                         <Icon:PackIconMaterial Kind="Magnify"

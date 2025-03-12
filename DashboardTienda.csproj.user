@@ -25,9 +25,6 @@
     <Compile Update="ViewModels\Legend.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="ViewModels\InfoCard.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Update="ViewModels\Login.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -75,49 +72,46 @@
     <Page Update="UserControls\UserCard.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UserControls\InfoCard.xaml">
-      <SubType>Designer</SubType>
-    </Page>
     <Page Update="UserControls\Legend.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UserControls\LegendRight.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\CommentsRightPanel.xaml">
+    <Page Update="Components\CommentsRightPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\CommentsView.xaml">
+    <Page Update="Components\CommentsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\HomeView.xaml">
+    <Page Update="Components\HomeView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Login.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\MainRightPanel.xaml">
+    <Page Update="Components\MainRightPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\OrdersRightPanel.xaml">
+    <Page Update="Components\OrdersRightPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\OrdersView.xaml">
+    <Page Update="Components\OrdersView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ProductsRightPanel.xaml">
+    <Page Update="Components\ProductsRightPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\ProductsView.xaml">
+    <Page Update="Components\ProductsView.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\UsersRightPanel.xaml">
+    <Page Update="Components\UsersRightPanel.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\UsersView.xaml">
+    <Page Update="Components\UsersView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

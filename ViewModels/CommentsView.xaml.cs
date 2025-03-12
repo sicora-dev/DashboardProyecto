@@ -24,31 +24,54 @@ namespace DashboardTienda.Views
     public partial class CommentsView : UserControl
     {
         private readonly Api api;
+        private List<Comment> Comments;
         public CommentsView()
         {
             InitializeComponent();
             api = new Api();
             LoadComments();
+            SearchService.Instance.PropertyChanged += OnSearchTextChanged;
         }
 
         private async void LoadComments()
         {
-            List<Comment> Comments = await GetCommentsAction();
+            if (Comments == null)
+            {
+                Comments = await GetCommentsAction();
+            }
+            CommentsPanel.Children.Clear();
+
             foreach (var comment in Comments)
             {
-                CommentCard commentCard = new CommentCard();
-                commentCard.UserName = comment.name;
-                commentCard.Comment = comment.content;
-                commentCard.Date = comment.date.ToString("yyyy-MM-dd");
-                commentCard.MouseLeftButtonUp += (s, e) => CommentSelectionService.Instance.SelectedComment = comment;
-                CommentsPanel.Children.Add(commentCard);
+                if (SearchService.Instance.SearchText != null)
+                {
+                    if (comment.content.Contains(SearchService.Instance.SearchText))
+                    {
+                        CommentCard commentCard = new CommentCard();
+                        commentCard.UserName = comment.name;
+                        commentCard.Comment = comment.content;
+                        commentCard.Date = comment.date.ToString("yyyy-MM-dd");
+                        commentCard.MouseLeftButtonUp += (s, e) => CommentSelectionService.Instance.SelectedComment = comment;
+                        CommentsPanel.Children.Add(commentCard);
+                    }
+                }
+                else
+                {
+                    CommentCard commentCard = new CommentCard();
+                    commentCard.UserName = comment.name;
+                    commentCard.Comment = comment.content;
+                    commentCard.Date = comment.date.ToString("yyyy-MM-dd");
+                    commentCard.MouseLeftButtonUp += (s, e) => CommentSelectionService.Instance.SelectedComment = comment;
+                    CommentsPanel.Children.Add(commentCard);
+                }
             }
 
         }
 
-        public void RefreshComments(object sender, RoutedEventArgs e)
+        public async void RefreshComments(object sender, RoutedEventArgs e)
         {
             CommentsPanel.Children.Clear();
+            Comments = await GetCommentsAction();
             LoadComments();
         }
         private async Task<List<Comment>> GetCommentsAction()
@@ -64,6 +87,11 @@ namespace DashboardTienda.Views
                 MessageBox.Show(result?.message ?? "Error al cargar los comentarios.");
                 return new List<Comment>();
             }
+        }
+
+        private void OnSearchTextChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            LoadComments();
         }
     }
 }

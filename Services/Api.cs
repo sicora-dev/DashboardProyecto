@@ -137,7 +137,7 @@ namespace DashboardTienda.Services
         {
             try
             {
-                var response = await _httpClient.GetAsync($"{_apiUrl}/products/categroy/{category_id}");
+                var response = await _httpClient.GetAsync($"{_apiUrl}/categories/{category_id}/products");
                 if (response.IsSuccessStatusCode)
                 {
                     var jsonString = await response.Content.ReadAsStringAsync();

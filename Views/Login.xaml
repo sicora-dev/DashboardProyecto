@@ -1,46 +1,116 @@
 ﻿<Window x:Class="DashboardTienda.Login"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DashboardTienda"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
         Title="LoginWindow" Height="500" Width="400">
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="boolToVisConv"/>
+    </Window.Resources>
+    
     <Border CornerRadius="10"
             Padding="20"
             Background="{DynamicResource BackgroundBrush}">
-        <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="4*" />
-        </Grid.RowDefinitions>
+        <Grid VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="4*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0" Background="{DynamicResource SecondaryBrush}">
-            <TextBlock VerticalAlignment="Center" FontSize="20" Foreground="{DynamicResource TextBrush}" HorizontalAlignment="Center" TextAlignment="Center" Text="Inicio de sesión"/>
-        </Grid>
-        <Grid HorizontalAlignment="Center" Grid.Row="1">
-            <StackPanel Margin="0,40,0,0">
-                <TextBlock FontSize="30" Text="Correo"/>
-                <TextBox VerticalAlignment="Center" FontSize="20" Width="150" Height="30" Grid.Row="1" x:Name="MailBox" Margin="5"/>
-                <TextBlock Margin="0,20,0,0" FontSize="30" Text="Contraseña"/>
-                <PasswordBox VerticalAlignment="Center" FontSize="15" Width="150" Height="30" Grid.Row="1" x:Name="PassBox" Margin="5"/>
-                
-                <Button Background="{DynamicResource HighlightBrush}" Click="LoginButton" Margin="0,20,0,0" Width="100px" Height="50px" Grid.Row="2" Content="Iniciar sesión" />
-            </StackPanel>
+            <Grid Grid.Row="0" Margin="0 20">
+                <TextBlock VerticalAlignment="Center" 
+                           FontSize="20" 
+                           Foreground="{DynamicResource TextBrush}"
+                           HorizontalAlignment="Center" 
+                           TextAlignment="Center" 
+                           Text="Inicio de sesión" 
+                           Style="{DynamicResource titleText}"/>
+            </Grid>
+            <Grid HorizontalAlignment="Center" Grid.Row="1">
+                <StackPanel Margin="0,0,0,0">
+                <Grid Width="300"
+                      HorizontalAlignment="Right">
+                        <TextBlock x:Name="EmailTextBlock"
+                                   Margin="15 0"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource TextBrush}"
+                                   Panel.ZIndex="1"
+                                   Text="Correo electrónico"
+                                   IsHitTestVisible="False">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=MailBox}" Value="0">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
 
-        </Grid>
-            <StackPanel HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        Margin="10"
-                        Grid.Column="2"
-                        Grid.Row="2">
-                <Button x:Name="ThemeToggle"
-                              Content="Toggle Theme"
-                              Background="{DynamicResource SecondaryBrush}"
-                              Click="ThemeToggleLogin"/>
-            </StackPanel>
+                        <TextBox x:Name="MailBox" 
+                             Style="{DynamicResource searchTextBox}" />
+
+                        <Icon:PackIconMaterial Kind="EmailOutline"
+                                               Height="15"
+                                               Width="15"
+                                               Foreground="{DynamicResource HighlightBrush}"
+                                               Margin=" 0 0 15 0"
+                                               HorizontalAlignment="Right"
+                                               VerticalAlignment="Center" />       
+                </Grid>
+                <Grid Width="300"
+                      HorizontalAlignment="Right"
+                      Margin="0 10 0 0">
+                    <TextBlock x:Name="PasswordTextBlock"
+                               Margin="15 0"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource TextBrush}"
+                               Panel.ZIndex="1"
+                               Text="Contraseña"
+                               IsHitTestVisible="False" />
+
+                    <PasswordBox x:Name="PassBox" 
+                                 Style="{DynamicResource passwordTextBox}" 
+                                 PasswordChanged="PassBox_PasswordChanged" />
+
+                    <Icon:PackIconMaterial Kind="LockOutline"
+                                           Height="15"
+                                           Width="15"
+                                           Foreground="{DynamicResource HighlightBrush}"
+                                           Margin=" 0 0 15 0"
+                                           HorizontalAlignment="Right"
+                                           VerticalAlignment="Center" />   
+                </Grid>
+                    <Button Margin="0 10 0 0" Style="{DynamicResource sendButton}" HorizontalAlignment="Center" Click="LoginButton">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Iniciar sesión"
+                                       Style="{DynamicResource menuButtonText}" />     
+                            <Icon:PackIconMaterial Kind="Login"
+                                                   Style="{DynamicResource sendButtonIcon}" />
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+
+            </Grid>
+            <Grid Grid.Row="2" HorizontalAlignment="Right">
+                <Button Style="{DynamicResource menuButton}" Click="ThemeToggleLogin">
+                    <StackPanel Orientation="Horizontal">
+                    <Icon:PackIconMaterial Kind="ToggleSwitchOutline"
+                                           Margin="15 0 15 0"
+                                           Style="{DynamicResource menuButtonIcon}" />
+                    
+                    </StackPanel>
+                </Button>
+            </Grid>
 
         </Grid>
     </Border>

@@ -25,6 +25,7 @@ namespace DashboardTienda
     {
         
         public LogedUser User => TokenService.Instance.User;
+        public string searchText = SearchService.Instance.SearchText;
 
         public MainWindow()
         {
@@ -32,8 +33,14 @@ namespace DashboardTienda
             DataContext = this;
             MainContent.Content = new HomeView();
             RightPanel.Content = new MainRightPanel();
+            SearchService.Instance.PropertyChanged += OnSearchTextChanged;
 
 
+        }
+
+        private void Search(object sender, RoutedEventArgs e)
+        {
+            SearchService.Instance.SearchText = textBoxSearch.Text;
         }
 
         private void ThemeToggleMain(object sender, RoutedEventArgs e)
@@ -43,35 +50,50 @@ namespace DashboardTienda
 
         private void ShowHome(object sender, RoutedEventArgs e)
         {
+            SearchService.Instance.SearchText = "";
+            textBoxSearch.Text = "";
             MainContent.Content = new HomeView();
             RightPanel.Content = new MainRightPanel();
         }
 
         private void ShowUsers(object sender, RoutedEventArgs e)
         {
+            SearchService.Instance.SearchText = "";
+            textBoxSearch.Text = "";
             MainContent.Content = new UsersView();
             RightPanel.Content = new UsersRightPanel();
         }
 
         private void ShowProducts(object sender, RoutedEventArgs e)
         {
-            // Implementar la vista de Productos si es necesario
+            SearchService.Instance.SearchText = "";
+            textBoxSearch.Text = "";
             MainContent.Content = new ProductsView();
             RightPanel.Content = new ProductsRightPanel();
         }
 
         private void ShowOrders(object sender, RoutedEventArgs e)
         {
-            // Implementar la vista de Pedidos si es necesario
+            SearchService.Instance.SearchText = "";
+            textBoxSearch.Text = "";
             MainContent.Content = new OrdersView();
             RightPanel.Content = new OrdersRightPanel();
         }
 
         private void ShowComments(object sender, RoutedEventArgs e)
         {
-           
+            SearchService.Instance.SearchText = "";
+            textBoxSearch.Text = "";
             MainContent.Content = new CommentsView();
             RightPanel.Content = new CommentsRightPanel();
+        }
+
+        private void OnSearchTextChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(SearchService.SearchText))
+            {
+                searchText = SearchService.Instance.SearchText;
+            }
         }
 
     }
