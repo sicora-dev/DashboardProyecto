@@ -56,7 +56,7 @@ namespace DashboardTienda.Views
 
         public async void OnUserBan(object sender, RoutedEventArgs e)
         {
-            var result = await api.BanUser(CommentSelectionService.Instance.SelectedComment.user_id);
+            var result = await api.UpdateUserStatus(CommentSelectionService.Instance.SelectedComment.user_id, true);
             MessageBox.Show(result?.message);
         }
     }

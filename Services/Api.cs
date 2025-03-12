@@ -171,7 +171,7 @@ namespace DashboardTienda.Services
         public async Task<ApiResponse?> GetUserById(string id)
         {
 
-            var httpResponse = await _httpClient.GetAsync($"{_apiUrl}/user/{id}");
+            var httpResponse = await _httpClient.GetAsync($"{_apiUrl}/users/{id}");
             return null;
         }
         public async Task<ApiResponse?> GetOrders()
@@ -259,7 +259,7 @@ namespace DashboardTienda.Services
                 }
                 var userJson = JsonSerializer.Serialize(updatedUser);
                 var content = new StringContent(userJson, Encoding.UTF8, "application/json");
-                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/user/{originalMail}")
+                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/users/by-email/{originalMail}")
                 {
                     Content = content
                 };
@@ -299,7 +299,7 @@ namespace DashboardTienda.Services
                 }
                 var userJson = JsonSerializer.Serialize(updatedProduct);
                 var content = new StringContent(userJson, Encoding.UTF8, "application/json");
-                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/product/{updatedProduct._id}")
+                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/products/{updatedProduct._id}")
                 {
                     Content = content
                 };
@@ -339,7 +339,7 @@ namespace DashboardTienda.Services
                 }
                 var userJson = JsonSerializer.Serialize(updatedOrder);
                 var content = new StringContent(userJson, Encoding.UTF8, "application/json");
-                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/order/{updatedOrder._id}")
+                var request = new HttpRequestMessage(HttpMethod.Put, $"{_apiUrl}/orders/{updatedOrder._id}")
                 {
                     Content = content
                 };
@@ -368,7 +368,7 @@ namespace DashboardTienda.Services
             }
         }
 
-        public async Task<ApiResponse?> BanUser(string user_id)
+        public async Task<ApiResponse?> UpdateUserStatus(string user_id, bool block)
         {
             try
             {
@@ -377,9 +377,19 @@ namespace DashboardTienda.Services
                 {
                     return null;
                 }
-                var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/user/block/{user_id}");
+                var statusObject = new
+                {
+                    blocked = block,
+                    block_date = block ? "permanently" : "none"
+                };
 
+                var statusJson = JsonSerializer.Serialize(statusObject);
+                var content = new StringContent(statusJson, Encoding.UTF8, "application/json");
 
+                var request = new HttpRequestMessage(HttpMethod.Patch, $"{_apiUrl}/users/{user_id}/status")
+                {
+                    Content = content
+                };
 
                 request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
                 var response = await _httpClient.SendAsync(request);
@@ -404,7 +414,7 @@ namespace DashboardTienda.Services
             }
         }
 
-        public async Task<ApiResponse?> UnBanUser(string user_id)
+        public async Task<ApiResponse?> UpdateUserRole(string user_id, string selectedRole)
         {
             try
             {
@@ -413,79 +423,14 @@ namespace DashboardTienda.Services
                 {
                     return null;
                 }
-                var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/user/unblock/{user_id}");
+                var roleObject = new { role = selectedRole };
+                var roleJson = JsonSerializer.Serialize(roleObject);
+                var content = new StringContent(roleJson, Encoding.UTF8, "application/json");
 
-
-
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.SendAsync(request);
-
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
+                var request = new HttpRequestMessage(HttpMethod.Patch, $"{_apiUrl}/users/{user_id}/role")
                 {
-                    PropertyNameCaseInsensitive = true
+                    Content = content
                 };
-                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
-                if (apiResponse != null)
-                {
-                    apiResponse.status = (int)response.StatusCode;
-                }
-                return apiResponse;
-
-            }
-            catch
-            {
-                MessageBox.Show("Error de conexión");
-                return null;
-            }
-        }
-
-        public async Task<ApiResponse?> GrantAdmin(string user_id)
-        {
-            try
-            {
-                var token = GetToken() ?? string.Empty;
-                if (string.IsNullOrEmpty(token))
-                {
-                    return null;
-                }
-                var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/user/grant_admin/{user_id}");
-
-
-
-                request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", token);
-                var response = await _httpClient.SendAsync(request);
-
-                var jsonString = await response.Content.ReadAsStringAsync();
-                var options = new JsonSerializerOptions
-                {
-                    PropertyNameCaseInsensitive = true
-                };
-                var apiResponse = JsonSerializer.Deserialize<ApiResponse>(jsonString, options);
-                if (apiResponse != null)
-                {
-                    apiResponse.status = (int)response.StatusCode;
-                }
-                return apiResponse;
-
-            }
-            catch
-            {
-                MessageBox.Show("Error de conexión");
-                return null;
-            }
-        }
-
-        public async Task<ApiResponse?> RevokeAdmin(string user_id)
-        {
-            try
-            {
-                var token = GetToken() ?? string.Empty;
-                if (string.IsNullOrEmpty(token))
-                {
-                    return null;
-                }
-                var request = new HttpRequestMessage(HttpMethod.Post, $"{_apiUrl}/user/revoke_admin/{user_id}");
 
 
 
@@ -521,7 +466,7 @@ namespace DashboardTienda.Services
                 {
                     return null;
                 }
-                var request = new HttpRequestMessage(HttpMethod.Delete, $"{_apiUrl}/comment/{comment_id}");
+                var request = new HttpRequestMessage(HttpMethod.Delete, $"{_apiUrl}/comments/{comment_id}");
                 
 
 

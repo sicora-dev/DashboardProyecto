@@ -77,25 +77,25 @@ namespace DashboardTienda.Views
 
         public async void OnUserBan(object sender, RoutedEventArgs e)
         {
-            var result = await api.BanUser(UserSelectionService.Instance.SelectedUser._id);
+            var result = await api.UpdateUserStatus(UserSelectionService.Instance.SelectedUser._id, true);
             MessageBox.Show(result?.message);
         }
 
         public async void OnUserUnBan(object sender, RoutedEventArgs e)
         {
-            var result = await api.UnBanUser(UserSelectionService.Instance.SelectedUser._id);
+            var result = await api.UpdateUserStatus(UserSelectionService.Instance.SelectedUser._id, false);
             MessageBox.Show(result?.message);
         }
 
         public async void OnUserGrant(object sender, RoutedEventArgs e)
         {
-            var result = await api.GrantAdmin(UserSelectionService.Instance.SelectedUser._id);
+            var result = await api.UpdateUserRole(UserSelectionService.Instance.SelectedUser._id, "admin");
             MessageBox.Show(result?.message);
         }
 
         public async void OnUserRevoke(object sender, RoutedEventArgs e)
         {
-            var result = await api.RevokeAdmin(UserSelectionService.Instance.SelectedUser._id);
+            var result = await api.UpdateUserRole(UserSelectionService.Instance.SelectedUser._id, "user");
             MessageBox.Show(result?.message);
         }
     }
