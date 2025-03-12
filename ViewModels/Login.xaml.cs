@@ -44,7 +44,6 @@ namespace DashboardTienda
 
             if (result?.status == 200)
             {
-                MessageBox.Show("Inicio de sesión exitoso.");
                 TokenService.Instance.Token = result.token;
                 TokenService.Instance.DecodeToken();
                 MainWindow mainWindow = new MainWindow();
@@ -57,6 +56,18 @@ namespace DashboardTienda
                 MessageBox.Show(result?.message ?? "Error en el inicio de sesión.");
             }
 
+        }
+
+        private void PassBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (PassBox.Password.Length > 0)
+            {
+                PasswordTextBlock.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PasswordTextBlock.Visibility = Visibility.Visible;
+            }
         }
 
         private void ThemeToggleLogin(object sender, RoutedEventArgs e)

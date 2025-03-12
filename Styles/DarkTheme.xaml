@@ -88,6 +88,17 @@
                 Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
     </Style>
 
+    <Style x:Key="sendButtonIcon" TargetType="Icon:PackIconMaterial">
+        <Setter Property="Margin" 
+        Value="20 0"/>
+        <Setter Property="Width"
+        Value="18" />
+        <Setter Property="Height"
+        Value="18" />
+        <Setter Property="Foreground"
+        Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+    </Style>
+
     <Style x:Key="menuButtonText"
            TargetType="TextBlock">
         <Setter Property="Margin"
@@ -96,6 +107,42 @@
                 Value="14" />
         <Setter Property="Foreground"
                 Value="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" />
+    </Style>
+
+    <Style x:Key="sendButton"
+           TargetType="Button">
+        <Setter Property="Background"
+        Value="Transparent" />
+        <Setter Property="Foreground"
+        Value="{DynamicResource TextBrush}" />
+        <Setter Property="Height"
+        Value="45" />
+        <Setter Property="FocusVisualStyle"
+        Value="{x:Null}" />
+        <Setter Property="Margin"
+        Value="15 0 15 5" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}"
+                    CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Stretch"
+                                  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver"
+             Value="True">
+                <Setter Property="Background"
+                Value="{DynamicResource HighlightBrush}" />
+                <Setter Property="Opacity"
+                    Value="0.8" />
+
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="searchBarBorder" TargetType="Border">
@@ -131,6 +178,35 @@
                         SnapsToDevicePixels="True">
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
                                   VerticalScrollBarVisibility="Hidden"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource HighlightBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource HighlightBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="passwordTextBox" TargetType="PasswordBox">
+        <Setter Property="Background" Value="{DynamicResource TertiaryBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Padding" Value="15 13 40 13"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="PasswordBox">
+                    <Border x:Name="border" CornerRadius="10" Background="{DynamicResource SecondaryBrush}" 
+                     BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding Background}" 
+                     SnapsToDevicePixels="True">
+                        <ScrollViewer x:Name="PART_ContentHost" Focusable="False" HorizontalScrollBarVisibility="Hidden"
+                               VerticalScrollBarVisibility="Hidden"/>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">

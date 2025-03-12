@@ -80,38 +80,58 @@
                     <TextBlock Text="Menú" Style="{DynamicResource menuTitle}"/>
 
                     <!-- Menu Buttons -->
-                    <Button Style="{DynamicResource menuButton}">
+                    <Button Style="{DynamicResource menuButton}" Click="ShowHome">
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="HomeOutline" Style="{DynamicResource menuButtonIcon}"/>
                             <TextBlock Text="Inicio"
-                                       Style="{DynamicResource menuButtonText}" />
+                   Style="{DynamicResource menuButtonText}" />
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{DynamicResource menuButton}">
+                    <Button Style="{DynamicResource menuButton}" Click="ShowUsers">
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="AccountOutline"
-                                                   Style="{DynamicResource menuButtonIcon}" />
+                               Style="{DynamicResource menuButtonIcon}" />
                             <TextBlock Text="Usuarios"
-                                       Style="{DynamicResource menuButtonText}" />
+                   Style="{DynamicResource menuButtonText}" />
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{DynamicResource menuButton}">
+                    <Button Style="{DynamicResource menuButton}" Click="ShowProducts">
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="ShoppingOutline"
-                                                   Style="{DynamicResource menuButtonIcon}" />
+                               Style="{DynamicResource menuButtonIcon}" />
                             <TextBlock Text="Productos"
-                                       Style="{DynamicResource menuButtonText}" />
+                   Style="{DynamicResource menuButtonText}" />
                         </StackPanel>
                     </Button>
 
-                    <Button Style="{DynamicResource menuButton}">
+                    <Button Style="{DynamicResource menuButton}" Click="ShowOrders">
                         <StackPanel Orientation="Horizontal">
                             <Icon:PackIconMaterial Kind="ReceiptTextOutline"
-                                                   Style="{DynamicResource menuButtonIcon}" />
+                               Style="{DynamicResource menuButtonIcon}" />
                             <TextBlock Text="Pedidos"
-                                       Style="{DynamicResource menuButtonText}" />
+                   Style="{DynamicResource menuButtonText}" />
+                        </StackPanel>
+                    </Button>
+
+                    <Button Style="{DynamicResource menuButton}" Click="ShowComments">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="CommentOutline"
+                                Style="{DynamicResource menuButtonIcon}" />
+                            <TextBlock Text="Comentarios"
+                                    Style="{DynamicResource menuButtonText}" />
+                        </StackPanel>
+                    </Button>
+
+                    <TextBlock Text="Configuración" Style="{DynamicResource menuTitle}"/>
+
+                    <Button Style="{DynamicResource menuButton}" Click="ThemeToggleMain">
+                        <StackPanel Orientation="Horizontal">
+                            <Icon:PackIconMaterial Kind="ToggleSwitchOutline"
+                               Style="{DynamicResource menuButtonIcon}" />
+                            <TextBlock Text="Cambiar Tema"
+                   Style="{DynamicResource menuButtonText}" />
                         </StackPanel>
                     </Button>
 
@@ -152,10 +172,21 @@
                                    Foreground="{DynamicResource TextBrush}"
                                    Panel.ZIndex="1"
                                    Text="Buscar"
-                                   IsHitTestVisible="False"
-                                   Visibility="{Binding ElementName=textBoxSearch, Path=Text.IsEmpty.Length, Converter={StaticResource boolToVisConv}}" />
+                                   IsHitTestVisible="False" >
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Text.Length, ElementName=textBoxSearch}" Value="0">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
 
                         <TextBox x:Name="textBoxSearch"
+                                 TextChanged="Search"
                                  Style="{DynamicResource searchTextBox}" />
 
                         <Icon:PackIconMaterial Kind="Magnify"
@@ -169,95 +200,11 @@
                 </Grid>
             </Border>
 
-            <!-- Info Card -->
-            <Grid Grid.Column="1" Grid.Row="1" Margin="10 0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <!-- Main Content -->
+            <ContentControl x:Name="MainContent" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Margin="10 0 10 0"/>
 
-                <!-- Card -->
-                <uc:InfoCard Grid.Column="0" Title="Sales" SubTitle="Compared to ($2646 Last Month)" Amount="3" Image="/Assets/sale.png"/>
-                <uc:InfoCard Grid.Column="1" Title="Purchase" SubTitle="Compared to ($1236 Last Month)" Amount="3" Image="/Assets/purchase.png"/>
-                <uc:InfoCard Grid.Column="2" Title="Return" SubTitle="Compared to (1422 Last Month)" Amount="3" Image="/Assets/return.png"/>
-
-            </Grid>
-            <!--Main Chart Section-->
-            <Border Grid.Column="1" Grid.Row="2" Style="{DynamicResource whiteBorder}" Margin="20 20 20 0">
-                <Grid Margin="15 5">
-                    <TextBlock Text="Comparativa Ventas" Style="{DynamicResource titleText}"/>
-                    <!--Legend-->
-                    <uc:Legend HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 8 10 0"/>
-
-                    <!--Chart-->
-                    <lvc:CartesianChart Grid.Row="1" Margin="5 40 0 60" LegendLocation="None">
-                        <lvc:CartesianChart.DataTooltip>
-                            <lvc:DefaultTooltip Background="Red" Foreground="{DynamicResource BackgroundBrush}" ShowTitle="False" BulletSize="10" Opacity="0.7"/>
-                        </lvc:CartesianChart.DataTooltip>
-                        <lvc:CartesianChart.AxisX>
-                            <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True" 
-                                      Title="Meses" Labels="{Binding Meses}">
-                                <lvc:Axis.Separator>
-                                    <lvc:Separator StrokeThickness="0" Step="1"/>
-                                </lvc:Axis.Separator>
-                            </lvc:Axis>
-                        </lvc:CartesianChart.AxisX>
-
-                        <lvc:CartesianChart.AxisY>
-                            <lvc:Axis Foreground="{DynamicResource TertiaryBrush}" ShowLabels="True" 
-                                      Title="Cantidad de Ventas">
-                                <lvc:Axis.Separator>
-                                    <lvc:Separator StrokeThickness="0" Step="1"/>
-                                </lvc:Axis.Separator>
-                            </lvc:Axis>
-                        </lvc:CartesianChart.AxisY>
-
-                        <lvc:CartesianChart.Series>
-                            <lvc:LineSeries x:Name="Ventas2024Graph" Fill="Transparent" StrokeThickness="3" PointGeometrySize="0"
-                                            Values="{Binding Ventas2024}">
-                                <lvc:LineSeries.Stroke>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0"/>
-                                        <GradientStop Color="#ff6d48" Offset="0.1"/>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="1.9"/>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="10"/>
-                                    </LinearGradientBrush>
-                                </lvc:LineSeries.Stroke>
-                            </lvc:LineSeries>
-                            <lvc:LineSeries x:Name="Ventas2023Graph" Fill="Transparent" StrokeThickness="3" PointGeometrySize="0"
-                                            Values="{Binding Ventas2023}">
-                                <lvc:LineSeries.Stroke>
-                                    <LinearGradientBrush>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="0"/>
-                                        <GradientStop Color="#0074ff" Offset="0.1"/>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="1.9"/>
-                                        <GradientStop Color="{DynamicResource BackgroundColor}" Offset="10"/>
-                                    </LinearGradientBrush>
-                                </lvc:LineSeries.Stroke>
-                            </lvc:LineSeries>
-                        </lvc:CartesianChart.Series>
-                    </lvc:CartesianChart>
-                    <!--Note-->
-                    <Grid VerticalAlignment="Bottom" Margin="10 0">
-                        <Icon:PackIconMaterial Kind="Information" Foreground="{DynamicResource HighlightBrush}"/>
-                        <TextBlock TextWrapping="Wrap" Margin="30 0 0 0" LineHeight="18" Foreground="{DynamicResource TextBrush}" Opacity="0.5"
-                                   Text="Comparativa de las ventas totales entre 2023 y 2024 sin tener en cuenta las devoluciones"/>
-                    </Grid>
-                </Grid>
-            </Border>
-
-
-            <StackPanel HorizontalAlignment="Right"
-                    VerticalAlignment="Bottom"
-                    Margin="10"
-                    Grid.Column="2"
-                    Grid.Row="2">
-                <Button x:Name="ThemeToggle"
-                          Content="Toggle Theme"
-                          Background="{DynamicResource SecondaryBrush}"
-                          Click="ThemeToggleMain"/>
-            </StackPanel>
+            <!--Right Chart Panel-->
+            <ContentControl x:Name="RightPanel" Grid.Column="2" Grid.RowSpan="3" Margin="0 20 0 0"/>
         </Grid>
     </Border>
 </Window>

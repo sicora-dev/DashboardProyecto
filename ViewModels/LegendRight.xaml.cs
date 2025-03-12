@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace DashboardTienda.UserControls
 {
     /// <summary>
-    /// Lógica de interacción para Legend.xaml
+    /// Lógica de interacción para LegendRight.xaml
     /// </summary>
-    public partial class Legend : UserControl
-    {      
-        public Legend()
+    public partial class LegendRight : UserControl
+    {
+        public LegendRight()
         {
             InitializeComponent();
         }
