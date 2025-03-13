@@ -42,7 +42,7 @@ namespace DashboardTienda.Views
                 txtPais.Text = UserSelectionService.Instance.SelectedUser.country_id.ToString();
                 txtRol.Text = UserSelectionService.Instance.SelectedUser.role;
                 txtBlocked.Text = UserSelectionService.Instance.SelectedUser.blocked.ToString();
-                if (UserSelectionService.Instance.SelectedUser.block_date != "none")
+                if (UserSelectionService.Instance.SelectedUser.block_date != "none" )
                 {
                     var date = UserSelectionService.Instance.SelectedUser.block_date.Split('T')[0];
                     txtBlockDate.Text = date;

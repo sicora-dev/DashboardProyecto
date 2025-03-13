@@ -45,7 +45,7 @@ namespace DashboardTienda.Views
             {
                 if (SearchService.Instance.SearchText != null)
                 {
-                    if(order._id.Contains(SearchService.Instance.SearchText))
+                    if(order._id.ToLower().Contains(SearchService.Instance.SearchText.ToLower()))
                     {
                         OrderCard orderCard = new OrderCard();
                         orderCard.Id = order._id;

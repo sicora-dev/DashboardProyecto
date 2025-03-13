@@ -43,7 +43,7 @@ namespace DashboardTienda.Views
               
                 if(SearchService.Instance.SearchText != null)
                 {
-                    if (user.name.Contains(SearchService.Instance.SearchText))
+                    if (user.name.ToLower().Contains(SearchService.Instance.SearchText.ToLower()))
                     {
                         UserCard userCard = new UserCard();
                         userCard.UserName = user.name;

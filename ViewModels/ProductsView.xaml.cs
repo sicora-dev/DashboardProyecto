@@ -67,7 +67,7 @@ namespace DashboardTienda.Views
             {
                 if (SearchService.Instance.SearchText != null)
                 {
-                    if (product.name.Contains(SearchService.Instance.SearchText))
+                    if (product.name.ToLower().Contains(SearchService.Instance.SearchText.ToLower()))
                     {
                         var categoryName = Categories?.FirstOrDefault(cat => cat.id == product.category_id)?.name ?? string.Empty;
                         ProductCard productCard = new ProductCard();

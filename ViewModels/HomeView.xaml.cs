@@ -26,8 +26,6 @@ namespace DashboardTienda.Views
     {
         public event PropertyChangedEventHandler PropertyChanged;
         public List<string> Meses { get; set; }
-        
-        public SeriesCollection SeriesCollection { get; set; }
 
         public List<Order> Orders { get; set; }
 

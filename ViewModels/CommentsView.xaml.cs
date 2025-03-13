@@ -45,7 +45,7 @@ namespace DashboardTienda.Views
             {
                 if (SearchService.Instance.SearchText != null)
                 {
-                    if (comment.content.Contains(SearchService.Instance.SearchText))
+                    if (comment.content.ToLower().Contains(SearchService.Instance.SearchText.ToLower()))
                     {
                         CommentCard commentCard = new CommentCard();
                         commentCard.UserName = comment.name;

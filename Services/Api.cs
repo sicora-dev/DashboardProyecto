@@ -168,12 +168,14 @@ namespace DashboardTienda.Services
         {
             return TokenService.Instance.Token;
         }
+      
         public async Task<ApiResponse?> GetUserById(string id)
         {
 
             var httpResponse = await _httpClient.GetAsync($"{_apiUrl}/users/{id}");
             return null;
         }
+       
         public async Task<ApiResponse?> GetOrders()
         {
             try
@@ -211,6 +213,7 @@ namespace DashboardTienda.Services
             }
 
         }
+       
         public async Task<ApiResponse?> GetUsers()
         {
             try
@@ -247,7 +250,7 @@ namespace DashboardTienda.Services
                 return null;
             }
         }
-
+      
         public async Task<ApiResponse?> UpdateUser(string originalMail, User updatedUser)
         {
             try
